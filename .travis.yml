@@ -4,5 +4,9 @@ scala:
   - 2.11.2
   - 2.12.0
 
+script:
+- sbt compile
+- sbt test
+
 jdk:
 - oraclejdk8
