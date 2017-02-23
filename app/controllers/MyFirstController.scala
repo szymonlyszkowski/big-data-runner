@@ -31,17 +31,6 @@ class MyFirstController extends Controller{
     Ok(s"index method $helloForm")
   }
 
-//  /**
-//    * Handles the form submission.
-//    */
-//  def sayHello = Action { implicit request =>
-//    helloForm.bindFromRequest.fold(
-//      formWithErrors => BadRequest(html.hello(formWithErrors)),
-//      {case (name, repeat, color) => Ok(s"following params were added $name, $repeat.toInt, $color")}
-//    )
-//  }
-
-
   /**
     * Handles the form submission.
     */
@@ -50,6 +39,10 @@ class MyFirstController extends Controller{
       formWithErrors => BadRequest(form(formWithErrors)),
       {case (name, repeat, color) => Ok(hello(name, repeat.toInt, color))}
     )
+  }
+
+  def redirect = Action {
+    Redirect(routes.HomeController.index())
   }
 
 
