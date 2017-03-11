@@ -14,7 +14,11 @@ GET    /dummy/action             controllers.MyFirstController.myAction
 
 GET     /dummy/sayHello          controllers.MyFirstController.sayHello
 
-GET     /api/v2/homeController      controllers.MyFirstController.redirect
+GET     /api/v2/homeController   controllers.MyFirstController.redirect
+GET     /api/v2/helloController  controllers.HelloController.index
+GET     /api/v2/helloController/count               controllers.HelloController.count
+GET     /api/v2/helloController/list                controllers.HelloController.list
+GET     /api/v2/helloController/filter/:text controllers.HelloController.filter(text)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
