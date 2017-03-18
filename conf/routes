@@ -6,7 +6,7 @@
 GET     /                           controllers.HomeController.index
 
 # An example controller showing a sample home page
-GET     /dummy                      controllers.MyFirstController.index
+GET     /dummy                   controllers.MyFirstController.index
 
 GET    /dummy/method             controllers.MyFirstController.controllerMethodWithParameter(name: String)
 
@@ -14,11 +14,11 @@ GET    /dummy/action             controllers.MyFirstController.myAction
 
 GET     /dummy/sayHello          controllers.MyFirstController.sayHello
 
-GET     /api/v2/homeController   controllers.MyFirstController.redirect
-GET     /api/v2/helloController  controllers.HelloController.index
-GET     /api/v2/helloController/count               controllers.HelloController.count
-GET     /api/v2/helloController/list                controllers.HelloController.list
-GET     /api/v2/helloController/filter/:text controllers.HelloController.filter(text)
+GET     /api/homeController                                             controllers.MyFirstController.redirect
+GET     /api/EmbeddedTweetsResourcesSparkController                     controllers.EmbeddedTweetsResourcesSparkController.index
+GET     /api/EmbeddedTweetsResourcesSparkController/count               controllers.EmbeddedTweetsResourcesSparkController.countTweets
+GET     /api/EmbeddedTweetsResourcesSparkController/list                controllers.EmbeddedTweetsResourcesSparkController.listTweets
+GET     /api/EmbeddedTweetsResourcesSparkController/filter/:text controllers.EmbeddedTweetsResourcesSparkController.filterByTweetsText(text)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
