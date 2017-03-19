@@ -7,7 +7,7 @@ import play.api.mvc._
 
 class EmbeddedTweetsResourcesSparkController extends Controller {
   val dataFile = "resources/tweet-json"
-  lazy val rdd = SparkCommons.sc.sqlContext.read.json(dataFile)
+  lazy val rdd = SparkCommons.sparkSession.getOrCreate().sqlContext.read.json(dataFile)
 
   def index = Action {
     Ok("hello world")
