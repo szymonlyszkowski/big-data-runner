@@ -8,5 +8,5 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
   */
 object SparkStreaming {
   val conf = new SparkConf().setMaster("local[*]").setAppName("dummy config")
-  val ssc = new StreamingContext(conf, Seconds(5))
+  val ssc = new StreamingContext(conf, Seconds(20))
 }

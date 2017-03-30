@@ -30,3 +30,6 @@ test-result
 server.pid
 *.eml
 /dist/
+
+*.toc
+*.aux

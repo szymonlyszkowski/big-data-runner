@@ -25,12 +25,11 @@ class LiveTweetResourcesSparkController @Inject() (config: play.api.Configuratio
     val tweetStream = TwitterUtils.createStream(SparkStreaming.ssc, Option(twitterInstance.getAuthorization)).map(new Gson().toJson(_))
 
     var numTweetsCollected: Long = 0
-
     tweetStream.foreachRDD((rdd, time) => {
       val count: Long = rdd.count()
       if (count > 0) {
-        val outputRDD = rdd.repartition(2)
-        outputRDD.saveAsTextFile("/home/szymonidas/tweets/tweets_" + time.milliseconds.toString)
+        val outputRDD = rdd.repartition(4)
+        outputRDD.saveAsTextFile("hdfs://localhost:8080/tweet_" + time.milliseconds.toString)
         numTweetsCollected += count
         if (numTweetsCollected > 20) {
             println(numTweetsCollected)
@@ -39,9 +38,8 @@ class LiveTweetResourcesSparkController @Inject() (config: play.api.Configuratio
     })
 
     tweetStream.print()
+    tweetStream.glom()
     SparkStreaming.ssc.start()
-//    SparkCommons.ssc.start()
-//    SparkCommons.ssc.
     Ok("started streaming")
   }
 
