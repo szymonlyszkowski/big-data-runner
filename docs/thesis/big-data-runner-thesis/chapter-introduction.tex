@@ -9,6 +9,15 @@ Streaming (przetwarzanie strumieniowe) - jest pojęciem antagonistycznym do prze
 \subsection{Operacje leniwe}
 Operacje leniwe to technika stosowana by zoptymalizować obliczenia. Polega na opóźnianiu obliczeń do momentu aż rezultat nie jest faktycznie wymagany. Można przyjąć, że "potokuje" poszczególne operacje jednoczesnie unikając zbędnej wymiany danych. Prostym przykładem może być zapisanie odczyt dużego pliku danych, zliczeniu wystąpień zadanej frazy i zapisanie wyniku w postaci innego pliku. Jeżeli taką akcję zdefinujemy jako leniwą całe obliczenie zostanie wywołane w momencie zapisania do pliku wynikowego. Jeżeli zapisanie do pliku wynikowego nie zostanie uruchomione operacje odczytu pliku, filtrowania po zadanej frazie również. Dzięki temu obciążenie systemu obliczeń nie jest generowane do momentu, aż jest to faktycznie potrzebne. 
 
-\section{Zakres pracy}
+\section{Cele pracy}
+Głównym celem pracy jest dogłębna analiza dwóch narzędzi do przetwarzania danych masowych w architekturze równoległej: Apache Spark\footnote{\url{http://spark.apache.org/}} oraz Apache Hadoop.\footnote{\url{https://hadoop.apache.org/}} Spark to projekt dosyć nowy projekt o otwartym kodzie źródłowym. Pierwsze wydanie nastąpiło 30 maja 2014. Wersja poddana badaniom to 2.1.0 wydana 28 grudnia 2016. Hadoop to narzędzie już dobrze znane na rynku ETL (pierwsze wydanie 27 grudnia 2001), wersja poddana analizie to 2.7.3 wydana 25 sierpnia 2016. Hadoop to rozwiązanie również na licencji otwartego kodu źródłowego. Analiza dotyczy takich czynników jak:
+\begin{itemize}
+	\item Wymagania sprzętowe, które stawiają oba narzędzia, które muszą być spełnione aby dostarczyć rezultaty obliczeń
+	\item Wyniki czasowe przetwarzania zadanej próbki wejściowej
+	\item Złożoność obsługi obu platform
+	\item Koszty rekrutacji oraz szkolenia kadry wyspecjalizowanej w danej platformie
+\end{itemize}
+Do analizy powstało narzędzie oparte na szkielecie aplikacji internetowych Play\footnote{\url{https://playframework.com/}}, które udostępnia interfejs HTTP dla operacji przetwarzania danych dla obydwu platform. Narzędzie to posłużyło do dostarczenia rezultatów, które mogły zostać poddane analizie ze względu na kryteria podane powyżej. Poza badaniami wykonanymi w pracy dokonana została ocena możliwości komercyjnego rozwoju portotypowego narzędzia powstałego na potrzeby analizy. Dodatkowo oceniona została opłacalność migracji z narzędzia Apache Hadoop na Apache Spark ze względu na wymagania końcowego użytkownika. 
+
 \section{Przegląd literatury}
 \section{Przegląd rozdziałów}
