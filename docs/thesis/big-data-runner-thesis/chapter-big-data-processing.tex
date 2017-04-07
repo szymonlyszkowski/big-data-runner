@@ -44,5 +44,23 @@ Na rynku danych masowych jest mnóstwo narzędzi, które wspierają przetwarzani
 Narzędzia z kategorii \textit{eksploracja danych} służą głównie do wydobywania informacji ze zbiorów danych o dużej objętości na podstawie danych wejściowych. Ich format jest dowolny. Często narzędzia tego rodzaju łączy się z narzędziami z dziedziny \textit{analityki biznesowej}. Dzięki takiemu podejściu można dokonywać analiz, raportów bądź pomiarów wydajności. \textit{Analiza bazodanowa} to operowanie na danych masowych po stronie bazy danych. Ta kategoria zakłada iż logika analizy danych jest zarazem częścią źródła danych. Często wykorzystwana podczas próby znalezienia relacji między danymi. \textit{Zarządzanie decyzją} - narzędzia wspomagające, bądź podejmujące decyzje na podstawie już dokonanej analizy danych. \textit{Wysoko dostępne rozproszone zorientowane obiektowo platformy} są szczególnie użyteczne podczas wstępnego przetwarzania danych. Jest to szczególnie ważne by pierwotny zbiór danych był okrojony i jednocześnie zawierał jak najwięcej wartościowych informacji. Takie podejście oszczędza czas oraz zasoby podczas bardziej złożonej analizy danych.\cite{big_data_tools}
 \newline Zauważalne jest, że dane masowe mogą być przetwarzane w różnoraki sposób. Metoda analizy powinna być dobrana w zależności od potrzeb i dostępnych zasobów obliczeniowych. Ze względu na zwyżkującą popularność nowego narzędzia w kategorii \textit{Hadoop} - Apache Spark w konkteście tej pracy magisterskiej dokonane jest jego porównanie z Apache Hadoop.\cite{databricks_survey}  
 \section{Paradygmat Map Reduce}
+Paradygmat Map Reduce to główne założenie rozproszonego przetwarzania danych. Pomysł zrodził się w firmie Google. Internetowy gigant potrzebował łątwo skalującego się rozwiązania, które można by było zastosować do indeksowania danych, które obsługiwała wyszukiwarka. Map reduce dzięki swojej łatwej rozszerzalności i możliwości zamiany bądz usuwania poszególnych części systemu obliczeniowego pozwolił na duże oszczędności oraz elastyczność w kwesti utrzymania systemu indeksowania. Rozszerzalność była szczególnie ważnym elementem gdyż indeksowany zbiór danych ciągle zwiększał swój zasób.
+\newline
+Map reduce pozwala na dzielenie dużego zbioru danych na części i wykonanie operacji na mniejszej ilości danych na danym serwerze należący do klastu komputerowego. Dzięki temu do analizy danych o dużej objętości mogą zostać zastosowane komputery o mniejszej mocy obliczeniowej, które są jednocześnie zdecydowanie tańsze w zakupie i utrzymaniu. Metoda dzieli się na dwa głowne kroki:
+\begin{itemize}
+	\item Map
+	\item Reduce 
+\end{itemize}
+Krok \textbf{map} przyjmuje główną porcję danych, dzieli na mniejsze części. Następnie podzielone już porcje danych są wysyłane na poszeczególne węzły(serwery) klastra komputerowego. Krok \textbf{reduce} jest odpowiedzialny za zebranie danych poddanych obróbce przez klaster. Po dokonanym kolekcjonowaniu zwracany jest wynik analizy wielkiego zbioru danych.\cite{map_reduce_description}
+\newline MR\footnote{Map Reduce} możemy zapisać funkcyjnie jako:
+\begin{equation}
+map(k1,v1) \to list(k2,v2)
+\end{equation}
+\begin{equation}
+reduce(k2, list (v2)) \to list (v3)
+\end{equation}
+gdzie \textit{map} przyjmuje problem $k1$ z dziedziny $v1$ i zwraca listę podproblemów $k2$ z dziedziny $v2$. Następnie MR zbiera wszystkie pary z tym samym kluczem $k2$ ze wszystkich list i grupuje je razem tworząc jedną grupę dla każdego klucza. Operacja \textit{reduce} jest wykonywana równolegle ($list(v2)$) dla każdej grupy. Wynikiem jest lista wartości $v3$, która może być pusta. \cite{map_reduce_microsoft_article}  
+
+\todo{Dodać przykład implementacji scala, java} 
 \section{Wykonywanie obliczeń przy użyciu klastrów komputerowych}
 \section{Operacje - przypadki użycia w architekturze równoległej}
