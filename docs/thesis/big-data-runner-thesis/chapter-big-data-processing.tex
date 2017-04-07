@@ -59,8 +59,23 @@ map(k1,v1) \to list(k2,v2)
 \begin{equation}
 reduce(k2, list (v2)) \to list (v3)
 \end{equation}
-gdzie \textit{map} przyjmuje problem $k1$ z dziedziny $v1$ i zwraca listę podproblemów $k2$ z dziedziny $v2$. Następnie MR zbiera wszystkie pary z tym samym kluczem $k2$ ze wszystkich list i grupuje je razem tworząc jedną grupę dla każdego klucza. Operacja \textit{reduce} jest wykonywana równolegle ($list(v2)$) dla każdej grupy. Wynikiem jest lista wartości $v3$, która może być pusta. \cite{map_reduce_microsoft_article}  
-
-\todo{Dodać przykład implementacji scala, java} 
+gdzie \textit{map} przyjmuje problem $k1$ z dziedziny $v1$ i zwraca listę podproblemów $k2$ z dziedziny $v2$. Następnie MR zbiera wszystkie pary z tym samym kluczem $k2$ ze wszystkich list i grupuje je razem tworząc jedną grupę dla każdego klucza. Operacja \textit{reduce} jest wykonywana równolegle ($list(v2)$) dla każdej grupy. Wynikiem jest lista wartości $v3$, która może być pusta.\cite{map_reduce_microsoft_article}
+\newline Przykładowa implementacja dla zliczania ilości poszczególnych słów w danym dokumencie dla języka scala jest przedstawiona w listingu \ref{lst:scala_word_count}.
+\begin{lstlisting}[language=scala, caption={Przykład "Word Count"},captionpos=b, label={lst:scala_word_count}]
+//Transformacja struktury danych
+val slowa = plik_wejsciowy.flatMap(linia => linia.split(" "))
+// Rozdzielenie dziedziny na podproblemy
+val podproblemy = words.map(slowo => (slowo, 1))
+// Redukcja danych - zliczenie wystapien poszczegolnych slow
+val liczba_wystapien = podproblemy.reduceByKey{case (x, y) => x + y}
+\end{lstlisting}
+Architektura paradygmatu MR jest przedstawiona na rysunku \ref{fig:@=map_reduce_schema}.\cite{map_reduce_figure} 
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{map_reduce_flow.png}
+	\caption{Architektura Map Reduce}
+	\label{fig:@=map_reduce_schema}
+\end{figure}
+\subsection{Faza Shuffle w Map Reduce}
 \section{Wykonywanie obliczeń przy użyciu klastrów komputerowych}
 \section{Operacje - przypadki użycia w architekturze równoległej}
