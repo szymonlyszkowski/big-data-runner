@@ -77,5 +77,21 @@ Architektura paradygmatu MR jest przedstawiona na rysunku \ref{fig:@=map_reduce_
 	\label{fig:@=map_reduce_schema}
 \end{figure}
 \subsection{Faza Shuffle w Map Reduce}
+Definicja paradygmatu nic nie wspomina o fazie textit{shuffle}\footnote{tasowanie, mieszanie}. Sam paradygmat zakłada iż każdy element wychodzący z fazy map trafia do reduktora obsługującego klucz tego właśnie elementu. Oczywiście jest to przypadek idealny, który zakłada iż dane pośrednie są już posortowane bądź wszystkie elementy mają ten sam klucz (występuje jeden reduktor). W praktyce takie scenariusze nie występują często i wymagne jest zorganizowanie danych pośrednich w sposób taki by trafiły do odpowiedniego reduktora. Za tą część jest odpowiedzialna faza shuffle, która w rzeczywistości jest bardzo kosztowna gdyż sprowadza się do posortowania danych ze względu na klucz i złączenie w odpowiednie grupy na bazie klucza. Głowny koszt jaki jest ponoszony to operacje wejścia-wyjścia, które są wymagane przez sortowanie i złączenie. Takie zachowanie jest widoczne na platformie Apache Hadoop.\cite{shuffle_description} Wąskie gardło paradygmatu jest ominięte w przypadku platformy Apache Spark, gdyż faza shuffle jest wykonywana w pamięci RAM co mocno redukuje koszty wejścia-wyjścia.\cite{spark_in_memory}
+\newline
+Praktyczna implementacja paradygmatu map reduce jest przedstawiona na rysunku \ref{fig:@=map_shuffle_reduce_schema}.\cite{map_shuffle_reduce_figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{MapReduceWordCount.png}
+	\caption{Architektura Map Reduce wraz z fazą shuffle}
+	\label{fig:@=map_shuffle_reduce_schema}
+\end{figure}
+\section{HDFS}
+HDFS\footnote{Hadoop Distributed File System}
+
+ 
 \section{Wykonywanie obliczeń przy użyciu klastrów komputerowych}
+\todo{tutaj coś o YARN, Mesos}
 \section{Operacje - przypadki użycia w architekturze równoległej}
+\todo{tutaj coś o use case big data}
