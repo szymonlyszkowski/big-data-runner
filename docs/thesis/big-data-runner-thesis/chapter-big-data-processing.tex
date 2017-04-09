@@ -87,7 +87,7 @@ Praktyczna implementacja paradygmatu map reduce jest przedstawiona na rysunku \r
 	\label{fig:@=map_shuffle_reduce_schema}
 \end{figure}
 \section{HDFS}
-HDFS\footnote{Hadoop Distributed File System} to istotna część ekosystemów Aprache Hadoop i Apache Spark. Jest to system plików zaprojektowany specjalne do pracy w środowisku rozproszonym, którego części mogą ulegać awarii. Dzięki temu dane przechowywane w HDFS nie potrzebują kopii zapasowej, gdyż sam system z założenia dokonuje odpowiednich duplikacji. HDFS to architektura master/slave gdzie węzłem master jest jednostka o nazwie \textit{NameNode}. NameNode zawiera wszelkiego rodzaju metadane o plikach zawartych w systemie np. prawa dostępu. W systemie występuje jeden NameNode. Węzły slave są oznaczone nazwą \textit{DataNode} - są odpowiedzialne za przechowywanie faktycznych danych. Z racji, iż HDFS jest zaprojektowany na potrzeby danych o dużym wolumenie (od 1GB do 1TB) DanaNode wewnętrznie dzielą pliki na mniejsze części, które dodatkowo są duplikowane na potrzeby kopii zapasowych. HDFS jest zaimplementowany na platformie Java, także może być uruchamiany na dowolnym systemie operacyjnym. HDFS prezentuje dwa ważne założenia, które są ważne z punktu końcowego użytkownika:
+HDFS\footnote{Hadoop Distributed File System} to istotna część ekosystemów Aprache Hadoop i Apache Spark. Jest to system plików zaprojektowany specjalne do pracy w środowisku rozproszonym, którego części mogą ulegać awarii. Dzięki temu dane przechowywane w HDFS nie potrzebują kopii zapasowej, gdyż sam system z założenia dokonuje odpowiednich duplikacji. HDFS to architektura master/slave gdzie węzłem master jest jednostka o nazwie \textit{NameNode}. NameNode zawiera wszelkiego rodzaju metadane o plikach zawartych w systemie np. prawa dostępu, ilość replik. W systemie występuje jeden NameNode. Węzły slave są oznaczone nazwą \textit{DataNode} - są odpowiedzialne za przechowywanie faktycznych danych. Z racji, iż HDFS jest zaprojektowany na potrzeby danych o dużym wolumenie (od 1GB do terabajtów - dokumentacja nie definiuje konkretnej wartości) DanaNode wewnętrznie dzielą pliki na mniejsze części, które dodatkowo są duplikowane na potrzeby kopii zapasowych. HDFS jest zaimplementowany na platformie Java, także może być uruchamiany na dowolnym systemie operacyjnym. HDFS prezentuje dwa ważne założenia, które są ważne z punktu końcowego użytkownika:
 \begin{itemize}
 	\item Koherentność danych
 	\item Przenoszenie obliczeń jest tańsze niż przenoszenie danych
@@ -99,8 +99,14 @@ Koherentność danych zapewnia łatwość w testowaniu i użytkowaniu - raz stwo
 	\caption{Architektura HDFS}
 	\label{fig:@=hdfs_architecture}
 \end{figure}
-\newline W kontekście analizy porównawczej Apache Spark i Apache Hadoop musi być zastosowany HDFS. Jest to jedyne źródło danych, na którym mogą operować obydwie platformy.
+\newline W kontekście analizy porównawczej Apache Spark i Apache Hadoop musi być zastosowany HDFS. Jest to jedyne źródło danych, na którym mogą operować obydwie platformy (Spark może pobierać dane również z innych źródeł baz typu NoSQL\footnote{Not only SQL - nierelacyjne bazy danych}).
 \section{Wykonywanie obliczeń przy użyciu klastrów komputerowych}
 \todo{tutaj coś o YARN, Mesos}
 \section{Operacje - przypadki użycia w architekturze równoległej}
-\todo{tutaj coś o use case big data}
+Występuje bardzo dużo zastosowań w przypadku analizy danych na platformach równoległych. Najpopularniejsze to:
+\begin{itemize}
+	\item Monitorowanie transakcji bankowych - selekcja tych transferów, które mogą być nielegalne dla pracownika banku
+	\item Analiza plików logowania
+	\item Analiza trendów rynkowych np. najpopularniejsze filmy w serwisie Netflix\footnote{www.netflix.com}
+	\item Migracja danych między centrami w różnych lokalizacjach. Map zapewni transfer małych porcji danych w sieci, reduce zadba o złączenie wcześniej wysłanych danych oraz sprawdzenie czy nie uległy modyfikacji. 
+\end{itemize}
