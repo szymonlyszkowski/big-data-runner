@@ -29,11 +29,9 @@ class LiveTweetResourcesSparkController @Inject() (config: play.api.Configuratio
       val count: Long = rdd.count()
       if (count > 0) {
         val outputRDD = rdd.repartition(4)
-        outputRDD.saveAsTextFile("hdfs://127.0.0.1:8080/user/tweets-hdfs/tweet_" + time.milliseconds.toString)
+        outputRDD.saveAsTextFile("hdfs://127.0.0.1:8080/test/tweet_" + time.milliseconds.toString)
         numTweetsCollected += count
-        if (numTweetsCollected > 20) {
-            println(numTweetsCollected)
-        }
+        println(numTweetsCollected)
       }
     })
 
