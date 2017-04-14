@@ -1,6 +1,7 @@
 package bigdata.engines.hadoop;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -10,6 +11,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.IOException;
@@ -46,6 +48,17 @@ public class WordCount {
     }
 
    public void run() throws Exception {
+       Path pt=new Path("hdfs://127.0.0.1:8080/test/tweet_1492113240000");
+//       FileSystem fs = FileSystem.get(new Configuration());
+//       BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(pt)));
+//       String line;
+//       line=br.readLine();
+//       while (line != null){
+//           System.out.println(line);
+//           line=br.readLine();
+//       }
+
+
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", "hdfs://127.0.0.1:8080");
         Job job = new Job(conf, "wordcount");
@@ -59,8 +72,8 @@ public class WordCount {
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-//        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path("/home/szymonidas/test.txt");
+        FileInputFormat.addInputPath(job, pt);
+        FileOutputFormat.setOutputPath(job, new Path("hdfs://127.0.0.1:8080/test/result.txt"));
 
         job.waitForCompletion(true);
     }

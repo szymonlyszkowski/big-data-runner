@@ -8,5 +8,5 @@ object SparkCommons {
     .appName("SparkSessionZipsExample")
     .master("local[*]")
     .config("spark.some.config.option", "config-value")
-    .config("spark.debug.maxToStringFields", 1000)
+    .config("spark.debug.maxToStreingFields", 1000)
 }
