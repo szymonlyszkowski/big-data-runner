@@ -23,6 +23,9 @@ GET     /api/spark/embedded/filter/:text        controllers.EmbeddedTweetsResour
 GET     /api/spark/live/list                    controllers.LiveTweetResourcesSparkController.listSampleTweets
 GET     /api/spark/live/list/stop               controllers.LiveTweetResourcesSparkController.stopStreaming
 
+GET     /api/spark/batch/merge/tweets           controllers.TweetMergeController.mergeTweets
+
+
 GET     /api/hadoop/wordcount                   controllers.HadoopController.wordCount
 
 # An example controller showing how to use dependency injection

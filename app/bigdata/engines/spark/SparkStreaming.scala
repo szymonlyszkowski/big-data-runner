@@ -1,6 +1,6 @@
 package bigdata.engines.spark
 
-import org.apache.spark.SparkConf
+import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**

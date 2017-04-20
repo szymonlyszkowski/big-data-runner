@@ -1,4 +1,4 @@
-package bigdata.engines.hadoop;
+package bigdata.engines.hadoop.actions;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

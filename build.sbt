@@ -3,6 +3,9 @@ name := """big-data-runner"""
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
+logBuffered := false
+parallelExecution in Test := false
 
 scalaVersion := "2.11.7"
 
@@ -17,7 +20,8 @@ libraryDependencies ++= Seq(
   "org.apache.bahir" % "spark-streaming-twitter_2.11" % "2.1.0",
   "org.twitter4j" % "twitter4j" % "4.0.6",
   "com.google.code.gson" % "gson" % "2.4",
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+  "com.storm-enroute" %% "scalameter" % "0.7" % Test
 )
 
 dependencyOverrides ++= Set(

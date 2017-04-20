@@ -3,7 +3,7 @@ package controllers;
 
 import javax.inject.Inject
 
-import bigdata.engines.hadoop.WordCount
+import bigdata.engines.hadoop.actions.WordCount
 import play.api.mvc.{Action, Controller};
 
 /**
