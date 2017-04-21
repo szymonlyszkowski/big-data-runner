@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
   "org.apache.bahir" % "spark-streaming-twitter_2.11" % "2.1.0",
   "org.twitter4j" % "twitter4j" % "4.0.6",
   "com.google.code.gson" % "gson" % "2.4",
+  "commons-net" % "commons-net" % "3.6",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
   "com.storm-enroute" %% "scalameter" % "0.7" % Test
 )

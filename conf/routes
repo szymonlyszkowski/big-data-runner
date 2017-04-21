@@ -20,13 +20,14 @@ GET     /api/spark/embedded/count               controllers.EmbeddedTweetsResour
 GET     /api/spark/embedded/list                controllers.EmbeddedTweetsResourcesSparkController.listTweets
 GET     /api/spark/embedded/filter/:text        controllers.EmbeddedTweetsResourcesSparkController.filterByTweetsText(text)
 
-GET     /api/spark/live/list                    controllers.LiveTweetResourcesSparkController.listSampleTweets
-GET     /api/spark/live/list/stop               controllers.LiveTweetResourcesSparkController.stopStreaming
+GET     /api/spark/live/list                    controllers.spark.LiveTweetResourcesSparkController.listSampleTweets
+GET     /api/spark/live/list/stop               controllers.spark.LiveTweetResourcesSparkController.stopStreaming
 
-GET     /api/spark/batch/merge/tweets           controllers.TweetMergeController.mergeTweets
+GET     /api/spark/batch/merge/tweets           controllers.spark.TweetMergeController.mergeTweets
 
 
-GET     /api/hadoop/wordcount                   controllers.HadoopController.wordCount
+GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount
+GET     /api/spark/wordcount                    controllers.spark.WordCountController.wordCount
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

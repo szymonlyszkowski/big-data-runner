@@ -12,6 +12,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.commons.net.ntp.TimeStamp;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -45,7 +46,7 @@ public class WordCount {
     }
 
     public void run(String basePathHDFS, String tweetsPathHDFS) throws Exception {
-        Path pt = new Path(tweetsPathHDFS + "tweet_1492113240000");
+        Path pt = new Path(basePathHDFS + "mergedTweets0.3686418061949279.txt");
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", basePathHDFS);
         Job job = new Job(conf, "wordcount");
@@ -60,7 +61,8 @@ public class WordCount {
         job.setOutputFormatClass(TextOutputFormat.class);
 
         FileInputFormat.addInputPath(job, pt);
-        FileOutputFormat.setOutputPath(job, new Path(tweetsPathHDFS +"result.txt"));
+        TimeStamp myTs = TimeStamp.getCurrentTime();
+        FileOutputFormat.setOutputPath(job, new Path(basePathHDFS +"hadoopResult" + myTs + ".txt"));
 
         job.waitForCompletion(true);
     }

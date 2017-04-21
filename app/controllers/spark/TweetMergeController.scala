@@ -1,4 +1,4 @@
-package controllers
+package controllers.spark
 
 import javax.inject.Inject
 
@@ -16,8 +16,9 @@ class TweetMergeController @Inject() (config: play.api.Configuration) extends Co
   def mergeTweets = Action{
     val tweetsFilePathPattern = config.getString("hadoop-tweets-url").get + "tweet_*"
     val randomSuffix = new Random().nextDouble()
-    val mergedFilePath = s"hdfs://127.0.0.1:8080/mergedTweets$randomSuffix.txt"
-    TweetMerge.mergeTweets(SparkStreaming.ssc.sparkContext, tweetsFilePathPattern, mergedFilePath)
+    val hdfsBaseUrl = config.getString("hadoop-base-url").get
+    val mergedFilePath = s"$hdfsBaseUrl" + s"mergedTweets$randomSuffix.txt"
+    TweetMerge.mergeTweets(SparkStreaming.sparkContext, tweetsFilePathPattern, mergedFilePath)
     Ok("Tweets merged into file: " + mergedFilePath)
   }
 

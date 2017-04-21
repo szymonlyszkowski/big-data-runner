@@ -5,7 +5,7 @@ import org.apache.spark.SparkContext
   * Created by szymonidas on 4/19/17.
   */
 class WordCount {
-  def sparkWordCount(sparkContext: SparkContext, filePath: String, wordCountResultFilePath: String) {
+  def run(sparkContext: SparkContext, filePath: String, wordCountResultFilePath: String) {
     val textFile = sparkContext.textFile(filePath)
     val counts = textFile.flatMap(line => line.split(" "))
       .map(word => (word, 1))
