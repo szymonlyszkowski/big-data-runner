@@ -13,9 +13,7 @@ import scala.util.Random
   */
 class WordCountController @Inject()(config: play.api.Configuration) extends Controller {
 
-  private val getHDFSMessage = "Couldn't get HDFS"
   def wordCount = Action {
-    val tweetsPathHDFS = config.getString("hadoop-tweets-url").get
     val basePathHDFS = config.getString("hadoop-base-url").get
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val destinationFileName = basePathHDFS + "sparkResult" + new Random().nextDouble().toString
