@@ -27,6 +27,7 @@ GET     /api/spark/batch/merge/tweets           controllers.spark.TweetMergeCont
 
 
 GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount
+GET     /api/hadoop/wordOccurrence/:word        controllers.hadoop.WordOccurrenceController.wordOccurrence(word: String)
 
 GET     /api/spark/wordcount                    controllers.spark.WordCountController.wordCount
 GET     /api/spark/wordOccurrence/:word         controllers.spark.WordOccurrenceController.wordOccurrence(word: String)
