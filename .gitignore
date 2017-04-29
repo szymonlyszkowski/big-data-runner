@@ -30,3 +30,8 @@ test-result
 server.pid
 *.eml
 /dist/
+
+*.toc
+*.aux
+*.pdf
+*.synctex.gz
