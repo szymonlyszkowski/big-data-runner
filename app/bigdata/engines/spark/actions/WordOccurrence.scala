@@ -15,8 +15,8 @@ class WordOccurrence {
     */
   def run(sparkContext: SparkContext, filePath: String, word: String) = {
       val lines: RDD[String] = sparkContext.textFile(filePath)
-      val errors = lines.filter(line => line.contains(word))
-      errors.count()
+      val linesContainingWord = lines.filter(line => line.contains(word))
+      linesContainingWord.count()
     }
 
 }

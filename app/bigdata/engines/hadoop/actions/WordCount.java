@@ -62,8 +62,7 @@ public class WordCount {
 
         FileInputFormat.addInputPath(job, pt);
         TimeStamp myTs = TimeStamp.getCurrentTime();
-        FileOutputFormat.setOutputPath(job, new Path(basePathHDFS +"hadoopResult" + myTs + ".txt"));
-
+        FileOutputFormat.setOutputPath(job, new Path(basePathHDFS +"hadoopWordCountResult" + myTs));
         job.waitForCompletion(true);
     }
 }
