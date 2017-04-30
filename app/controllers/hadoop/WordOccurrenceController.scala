@@ -9,7 +9,7 @@ import play.api.mvc.{Action, Controller}
   * Created by szymonidas on 4/28/17.
   */
 class WordOccurrenceController @Inject()(config: play.api.Configuration) extends Controller {
-  def wordOccurrence(wordToBeFound: String) = Action {
+  def wordReject(wordToBeFound: String) = Action {
     val basePathHDFS = config.getString("hadoop-base-url").get
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val wordOccurrenceAmount = new WordOccurrence().run(basePathHDFS, wordToBeFound)

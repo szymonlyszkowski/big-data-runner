@@ -27,10 +27,13 @@ GET     /api/spark/batch/merge/tweets           controllers.spark.TweetMergeCont
 
 
 GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount
-GET     /api/hadoop/wordOccurrence/:word        controllers.hadoop.WordOccurrenceController.wordOccurrence(word: String)
+GET     /api/hadoop/wordOccurrence/:word        controllers.hadoop.WordOccurrenceController.wordReject(word: String)
+GET     /api/hadoop/wordReject/:word            controllers.hadoop.WordRejectController.wordReject(word: String)
+
 
 GET     /api/spark/wordcount                    controllers.spark.WordCountController.wordCount
 GET     /api/spark/wordOccurrence/:word         controllers.spark.WordOccurrenceController.wordOccurrence(word: String)
+GET     /api/spark/wordReject/:word             controllers.spark.WordRejectController.wordReject(word: String)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
