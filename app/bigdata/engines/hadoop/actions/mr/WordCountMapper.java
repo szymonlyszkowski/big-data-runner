@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * Created by szymonidas on 5/1/17.
  */
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-    private final static IntWritable one = new IntWritable(1);
+    private final IntWritable one = new IntWritable(1);
     private Text word = new Text();
 
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
