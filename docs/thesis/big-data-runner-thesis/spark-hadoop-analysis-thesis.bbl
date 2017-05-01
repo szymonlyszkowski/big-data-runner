@@ -1,0 +1,97 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{YTLW16}
+
+\bibitem[Ada]{map_shuffle_reduce_figure}
+Professor~Joel Adams.
+\newblock Architektura map reduce wraz z fazą shuffle.
+\newblock \url{https://cs.calvin.edu/courses/cs/374/exercises/12/lab/}.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[CT16]{big_data_tools}
+R.~K. Chawda and G.~Thakur.
+\newblock Big data and advanced analytics tools.
+\newblock In {\em 2016 Symposium on Colossal Data Analysis and Networking
+  (CDAN)}, pages 1--8, March 2016.
+
+\bibitem[dat16]{databricks_survey}
+databricks.com.
+\newblock Spark survey.
+\newblock
+  \url{http://cdn2.hubspot.net/hubfs/438089/DataBricks_Surveys_-_Content/2016_Spark_Survey/2016_Spark_Infographic.pdf?t=1491431917055},
+  2016.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[HDFa]{HDFS_architecture}
+Architektura hdfs.
+
+\bibitem[HDFb]{HDFS}
+Opis architektury hdfs.
+\newblock \url{https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html}.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[HYH{\etalchar{+}}16]{spark_in_memory}
+Y.~Huang, Y.~Yesha, M.~Halem, Y.~Yesha, and S.~Zhou.
+\newblock Yinmem: A distributed parallel indexed in-memory computation system
+  for large scale data analytics.
+\newblock In {\em 2016 IEEE International Conference on Big Data (Big Data)},
+  pages 214--222, Dec 2016.
+
+\bibitem[Lam]{map_reduce_microsoft_article}
+Ralf Lammel.
+\newblock Google’s mapreduce programming model — revisited.
+\newblock
+  \url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.104.5859&rep=rep1&type=pdf}.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[Lei12]{mit_presentation}
+Charles~E. Leiserson.
+\newblock Parallelism without concurrency.
+\newblock
+  \url{http://www.cs.cmu.edu/~guyb/spaa/2012/workshop/leiserson-talk.pdf},
+  2012.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[LLCY13]{shuffle_description}
+J.~Li, X.~Lin, X.~Cui, and Y.~Ye.
+\newblock Improving the shuffle of hadoop mapreduce.
+\newblock In {\em 2013 IEEE 5th International Conference on Cloud Computing
+  Technology and Science}, volume~1, pages 266--273, Dec 2013.
+
+\bibitem[map]{map_reduce_figure}
+Architektura map reduce.
+\newblock
+  \url{http://spideropsnet.com/site1/wp-content/uploads/2014/08/MapReduce\_flow.png}.
+\newblock Dostęp: 2017-04-09.
+
+\bibitem[MSZ14]{big_data_concept}
+P.~Michalik, J.~Stofa, and I.~Zolotova.
+\newblock Concept definition for big data architecture in the education system.
+\newblock In {\em 2014 IEEE 12th International Symposium on Applied Machine
+  Intelligence and Informatics (SAMI)}, pages 331--334, Jan 2014.
+
+\bibitem[OT15]{cluster_grid_cloud}
+M.~Obali and A.~E. Topcu.
+\newblock Comparison of cluster, grid and cloud computing using three different
+  approaches.
+\newblock In {\em 2015 23nd Signal Processing and Communications Applications
+  Conference (SIU)}, pages 192--195, May 2015.
+
+\bibitem[SK11]{cluster_grid_cloud_detailed_comparison}
+N.~Sadashiv and S.~M.~D. Kumar.
+\newblock Cluster, grid and cloud computing: A detailed comparison.
+\newblock In {\em 2011 6th International Conference on Computer Science
+  Education (ICCSE)}, pages 477--482, Aug 2011.
+
+\bibitem[SY09]{map_reduce_description}
+K.~Sergey and K.~Yury.
+\newblock Applying map-reduce paradigm for parallel closed cube computation.
+\newblock In {\em 2009 First International Confernce on Advances in Databases,
+  Knowledge, and Data Applications}, pages 62--67, March 2009.
+
+\bibitem[YTLW16]{big_data_great_services}
+J.~Yin, Y.~Tang, W.~Lo, and Z.~Wu.
+\newblock From big data to great services.
+\newblock In {\em 2016 IEEE International Congress on Big Data (BigData
+  Congress)}, pages 165--172, June 2016.
+
+\end{thebibliography}
