@@ -1,4 +1,4 @@
-package controllers.spark
+package controllers.spark.live
 
 import javax.inject.Inject
 

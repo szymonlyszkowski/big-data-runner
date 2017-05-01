@@ -8,7 +8,7 @@ class WordReject {
     * @param sparkContext
     * @param filePath
     * @param word
-    * @return numberOfWordOccurrence
+    * @return numerOfWordLeftAfterRejection
     */
   def run(sparkContext: SparkContext, filePath: String, word: String, destinationFileName: String) = {
     val lines: RDD[String] = sparkContext.textFile(filePath)

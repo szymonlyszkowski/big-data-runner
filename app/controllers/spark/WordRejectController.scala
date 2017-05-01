@@ -18,7 +18,7 @@ class WordRejectController @Inject()(config: play.api.Configuration) extends Con
     val basePathHDFS = config.getString("hadoop-base-url").get
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val destinationFileName = basePathHDFS + "sparkWordRejectResult" + new Random().nextDouble().toString
-    val wordOccurrenceAmount = new WordReject().run(SparkStreaming.sparkContext, basePathHDFS + s"$sourceFileName", wordToBeFound, destinationFileName)
-    Ok(s"Spark Map Reduce rejected lines containing $wordToBeFound. Lines remained: " + wordOccurrenceAmount)
+    val numerOfWordLeftAfterRejection = new WordReject().run(SparkStreaming.sparkContext, basePathHDFS + s"$sourceFileName", wordToBeFound, destinationFileName)
+    Ok(s"Spark Map Reduce job reject lines containing '$wordToBeFound' done. Lines remained: " + numerOfWordLeftAfterRejection)
   }
 }

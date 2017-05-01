@@ -1,7 +1,6 @@
 package controllers.spark
 
 import javax.inject.Inject
-
 import bigdata.engines.spark.SparkStreaming
 import bigdata.engines.spark.actions.{WordOccurrence}
 import play.api.mvc.{Action, Controller}
@@ -15,6 +14,6 @@ class WordOccurrenceController @Inject()(config: play.api.Configuration) extends
     val basePathHDFS = config.getString("hadoop-base-url").get
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val wordOccurrenceAmount = new WordOccurrence().run(SparkStreaming.sparkContext, basePathHDFS + s"$sourceFileName", wordToBeFound)
-    Ok(s"Spark Map Reduce filter lines by $wordToBeFound occurrence job run result: " + wordOccurrenceAmount)
+    Ok(s"Spark Map Reduce job filter lines done. Amount of lines containing '$wordToBeFound': " + wordOccurrenceAmount)
   }
 }
