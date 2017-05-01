@@ -1,44 +1,20 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+#Endpoints accessing Twitter API
+GET     /api/spark/live/list                    controllers.spark.live.LiveTweetResourcesSparkController.listSampleTweets
+GET     /api/spark/live/list/stop               controllers.spark.live.LiveTweetResourcesSparkController.stopStreaming
 
-# An example controller showing a sample home page
-GET     /dummy                   controllers.MyFirstController.index
-
-GET    /dummy/method             controllers.MyFirstController.controllerMethodWithParameter(name: String)
-
-GET    /dummy/action             controllers.MyFirstController.myAction
-
-GET     /dummy/sayHello          controllers.MyFirstController.sayHello
-
-GET     /api/spark/homeController                                             controllers.MyFirstController.redirect
-GET     /api/spark/embedded                     controllers.EmbeddedTweetsResourcesSparkController.index
-GET     /api/spark/embedded/count               controllers.EmbeddedTweetsResourcesSparkController.countTweets
-GET     /api/spark/embedded/list                controllers.EmbeddedTweetsResourcesSparkController.listTweets
-GET     /api/spark/embedded/filter/:text        controllers.EmbeddedTweetsResourcesSparkController.filterByTweetsText(text)
-
-GET     /api/spark/live/list                    controllers.spark.LiveTweetResourcesSparkController.listSampleTweets
-GET     /api/spark/live/list/stop               controllers.spark.LiveTweetResourcesSparkController.stopStreaming
-
-GET     /api/spark/batch/merge/tweets           controllers.spark.TweetMergeController.mergeTweets
-
-
-GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount
-GET     /api/hadoop/wordOccurrence/:word        controllers.hadoop.WordOccurrenceController.wordReject(word: String)
-GET     /api/hadoop/wordReject/:word            controllers.hadoop.WordRejectController.wordReject(word: String)
-
-
+#Endpoints using HDFS & Spark
+GET     /api/spark/batch/merge/tweets           controllers.spark.batch.TweetMergeController.mergeTweets
 GET     /api/spark/wordcount                    controllers.spark.WordCountController.wordCount
 GET     /api/spark/wordOccurrence/:word         controllers.spark.WordOccurrenceController.wordOccurrence(word: String)
 GET     /api/spark/wordReject/:word             controllers.spark.WordRejectController.wordReject(word: String)
 
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+#Endpoints using HDFS & Hadoop
+GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount
+GET     /api/hadoop/wordOccurrence/:word        controllers.hadoop.WordOccurrenceController.wordOccurrence(word: String)
+GET     /api/hadoop/wordReject/:word            controllers.hadoop.WordRejectController.wordReject(word: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

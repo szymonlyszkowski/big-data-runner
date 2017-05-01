@@ -13,6 +13,6 @@ class WordRejectController @Inject()(config: play.api.Configuration) extends Con
     val basePathHDFS = config.getString("hadoop-base-url").get
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val linesLeftAfterRejection = new WordReject().run(basePathHDFS, wordToBeFound)
-    Ok(s"Hadoop Map Reduce reject phrase '$wordToBeFound' " + linesLeftAfterRejection)
+    Ok(s"Hadoop Map Reduce job reject lines containing '$wordToBeFound' done. Lines remained: " + linesLeftAfterRejection)
   }
 }

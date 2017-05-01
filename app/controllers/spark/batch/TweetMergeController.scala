@@ -1,4 +1,4 @@
-package controllers.spark
+package controllers.spark.batch
 
 import javax.inject.Inject
 

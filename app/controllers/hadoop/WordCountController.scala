@@ -14,7 +14,7 @@ class WordCountController @Inject()(config: play.api.Configuration) extends Cont
   def wordCount = Action {
     val tweetsPathHDFS = config.getString("hadoop-tweets-url").getOrElse(throw new RuntimeException(s"$getHDFSMessage tweets path from application configuration file!"))
     val basePathHDFS = config.getString("hadoop-base-url").getOrElse(throw new RuntimeException(s"$getHDFSMessage base path!"))
-    new WordCount().run(basePathHDFS, tweetsPathHDFS)
+    new WordCount().run(basePathHDFS)
     Ok("Word count done via Hadoop")
   }
 

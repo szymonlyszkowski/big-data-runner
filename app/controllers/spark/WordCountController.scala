@@ -18,7 +18,7 @@ class WordCountController @Inject()(config: play.api.Configuration) extends Cont
     val sourceFileName = "mergedTweets0.3686418061949279.txt"
     val destinationFileName = basePathHDFS + "sparkWordCountResult" + new Random().nextDouble().toString
     new WordCount().run(SparkStreaming.sparkContext, basePathHDFS + s"$sourceFileName", destinationFileName)
-    Ok("Word count done via Spark")
+    Ok(s"Word count done via Spark, result saved to $destinationFileName file.")
   }
 
 }
