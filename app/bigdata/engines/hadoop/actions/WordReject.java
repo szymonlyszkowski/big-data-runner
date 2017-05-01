@@ -1,22 +1,17 @@
 package bigdata.engines.hadoop.actions;
 
-import bigdata.engines.hadoop.actions.mr.FilterMapper;
 import bigdata.engines.hadoop.actions.mr.RejectMapper;
 import bigdata.engines.hadoop.actions.mr.SimpleReduce;
 import org.apache.commons.net.ntp.TimeStamp;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-
-import java.io.IOException;
 
 public class WordReject {
 

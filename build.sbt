@@ -2,12 +2,15 @@ name := """big-data-runner"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SonarRunnerPlugin)
+
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
 logBuffered := false
 parallelExecution in Test := false
 
 scalaVersion := "2.11.7"
+resolvers ++= Seq(
+  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots", Resolver.jcenterRepo)
 
 libraryDependencies ++= Seq(
   jdbc,
@@ -29,5 +32,11 @@ dependencyOverrides ++= Set(
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.6.0"
 )
 
+sonarRunnerOptions := Seq("-e", "-X")
+sonarProperties ++= Map(
+  "sonar.host.url" -> "http://127.0.0.1:9000",
+  "sonar.jdbc.username" -> "admin",
+  "sonar.jdbc.password" -> "admin"
+)
 
 fork in run := false

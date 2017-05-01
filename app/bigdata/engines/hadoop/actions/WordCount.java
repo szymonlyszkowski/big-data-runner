@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class WordCount {
-    public void run(String basePathHDFS, String tweetsPathHDFS) throws Exception {
+    public void run(String basePathHDFS) throws Exception {
         Path pt = new Path(basePathHDFS + "mergedTweets0.3686418061949279.txt");
         Configuration conf = new Configuration();
         conf.set("fs.defaultFS", basePathHDFS);
