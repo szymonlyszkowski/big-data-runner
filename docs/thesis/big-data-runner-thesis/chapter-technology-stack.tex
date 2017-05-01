@@ -1,2 +1,18 @@
 \chapter{Stos technologiczny} \label{chap.technology-stack}
+
+\section{Narzędzia, biblioteki, języki programowania}
+Do wykonania badań powstała aplikacja internetowa, która udostępnia końcowemu użytkownikowi protokół HTTP. Dzięki temu użytkownik może wykonywać operacje wykorzystujące paradygmat map-reduce bez znajomości platform udostępniających przetwarzanie danych masowych jak również serwisów internetowych. Aplikacja nosi nazwę \textit{big-data-runner}. Aplikacja może być udostępniona na zdalnym serwerze jak również może być uruchomiona lokalnie. Aby uruchomić aplikację jedyne co użytkownik musi posiadać to:
+\begin{itemize}
+	\item{Wirtualna Maszyna Java w wersji 8\footnote{JVM https://www.java.com/pl/download/}}
+	\item{Scala Build Tool \footnote{SBT http://www.scala-sbt.org/}}
+\end{itemize}
+JVM jest odpowiedzialna za środowisko uruchomieniowe aplikacji internetowej. SBT to narzędzie, które umożliwia kompilację całej aplikacji wraz z bibliotekami zewnętrznymi (jeżeli biblioteki nie znajdują się w katalogu lokalnym zostaną pobrane ze zdalnego repozytorium) oraz jej uruchomienie w serwerze aplikacji internetowych \textit{Netty}\footnote{https://netty.io/}. Z ramę projektową odpowiedzialny jest Play Framework, który umożliwia łatwą i szybką implementację protokołu HTTP dla końcowego użytkownika.
+\newpage
+Zastosowane języki programowania to:
+\begin{itemize}
+	\item {Java}
+	\item {Scala}
+\end{itemize}
+
+Większość kodu aplikacji to Scala - kontrolery, konfiguracja SBT, dostępy do serwisów zewnętrznych, wywoływanie interfejsu programistycznego Spark. Java została wykorzystana podczas obsługi API\footnote{Application Programmer Interface} platformy Hadoop tworząc w ten sposób własne API, które mogło być wykorzystane w kontrolerach napisanych w Scali.
 \todo{opis aplikacji, architektura, użyte technologie, zasada działania}
