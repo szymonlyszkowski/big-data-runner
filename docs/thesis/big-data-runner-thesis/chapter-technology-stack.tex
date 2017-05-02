@@ -15,4 +15,34 @@ Zastosowane języki programowania to:
 \end{itemize}
 
 Większość kodu aplikacji to Scala - kontrolery, konfiguracja SBT, dostępy do serwisów zewnętrznych, wywoływanie interfejsu programistycznego Spark. Java została wykorzystana podczas obsługi API\footnote{Application Programmer Interface} platformy Hadoop tworząc w ten sposób własne API, które mogło być wykorzystane w kontrolerach napisanych w Scali.
+
+\section{Architektura aplikacji}
+Architektura aplikacji big-data-runner jest przedstawiona na rysunku \ref{fig:@=big-data-runner_arch}. 
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[scale=0.4]{big-data-runner-architecture.png}
+	\caption{Architektura big-data-runner}
+	\label{fig:@=big-data-runner_arch}
+\end{figure}
+\newline Podczas użytkowania aplikacji użytkownik wysyła żądanie HTTP do aplikacji. Cały mechanizm obsługi żądania oraz odpowiedzi jest zaimplementowany w ramie projektowej Play! Za żądania odpowiedzialne są kontrolery, które wykonują logikę biznesową aplikacji. W zależności od adresu żądania wywołanego przez użytkownika uruchamiany jest odpowiedni kontroler, który wywołuje daną operację na platformie obliczeniowej. W zależności od tego czy operacje są wywoływane w kontekście platformy Hadoop czy Spark, używane są odpowiednio języki programowania: Java, Scala. Z racji iż aplikacja integruje dwie platformy obok siebie możemy uznać, że kontrolery są częścią aplikacji, które wysyłają \textit{driver program}\footnote{Program sterujący - \url{http://spark.apache.org/docs/latest/cluster-overview.html}} do platformy Hadoop lub Spark. W dokumentacji Apache Hadoop możemy spotkać się z określeniem \textit{Job Configuration}\footnote{Konfiguracja pracy - \url{https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/Job.html}}. Po wysłaniu odpowiednich instrukcji następuje wykonywanie obliczeń przez daną platformę. Same platformy są dołączone do aplikacji jako biblioteki zewnętrzne. Są integrowane przez narzędzie budujące aplikację SBT. Jednym elementem systemu przetwarzania danych masowych, który nie jest zintegrowany z aplikacją jest HDFS - warstwa odpowiedzialna za przechowywanie danych. HDFS może być umiejscowiony na zdalnym serwerze bądź obok samej aplikacji. Może być pobrany pod adresem: \url{http://hadoop.apache.org/releases.html}. W przeprowadzonych badaniach została użyta wersja 2.8.0. Adres HDFS jest zdefiniowany we właściwościach aplikacji, które znajdują się w pliku \path{<application-root>/conf/application.conf}. Dzięki temu w łatwy sposób administrator aplikacji może zmieniać adres źródła danych.
+\section{Interfejs końcowego użytkownika}
+Żądania HTTP obsługują trzy rodzaje operacji, które można wykonać na platformach równoległych:
+\begin{itemize}
+	\item {Zliczanie ilości wystąpień poszczególnych fraz tekstowych(oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku}
+	\item {Zliczanie ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika}
+	\item {Odrzucenie linii zawierających frazę tekstową zdefiniowaną przez użytkownika oraz zapisanie wyniku filtracji do pliku}
+\end{itemize}
+W zależności od platformy obliczeniowej użytkownik może wybrać następujące punkty obsługi żądania:
+\begin{itemize}
+	\item{\url{<hostname>/api/spark/wordcount}}
+	\item{\url{<hostname>/api/spark/wordOccurrence/<string> }}
+	\item{\url{<hostname>/api/spark/wordReject/<string> }}
+	\item{\url{<hostname>/api/hadoop/wordcount}}
+	\item{\url{<hostname>/api/hadoop/wordOccurrence/<string>}}
+	\item{\url{<hostname>/api/hadoop/wordReject/<string> }}
+\end{itemize}
+
+
+
+
 \todo{opis aplikacji, architektura, użyte technologie, zasada działania}

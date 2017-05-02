@@ -60,7 +60,7 @@ map(k1,v1) \to list(k2,v2)
 reduce(k2, list (v2)) \to list (v3)
 \end{equation}
 gdzie \textit{map} przyjmuje problem $k1$ z dziedziny $v1$ i zwraca listę podproblemów $k2$ z dziedziny $v2$. Następnie MR zbiera wszystkie pary z tym samym kluczem $k2$ ze wszystkich list i grupuje je razem tworząc jedną grupę dla każdego klucza. Operacja \textit{reduce} jest wykonywana równolegle ($list(v2)$) dla każdej grupy. Wynikiem jest lista wartości $v3$, która może być pusta.\cite{map_reduce_microsoft_article}
-\newline Przykładowa implementacja dla zliczania ilości poszczególnych słów w danym dokumencie dla języka scala jest przedstawiona w listingu \ref{lst:scala_word_count}.
+\newline Przykładowa implementacja dla zliczania ilości poszczególnych słów w danym dokumencie dla języka Scala jest przedstawiona w listingu \ref{lst:scala_word_count}.
 \begin{lstlisting}[language=scala, caption={Przykład "Word Count"},captionpos=b, label={lst:scala_word_count}]
 //Transformacja struktury danych
 val slowa = plik_wejsciowy.flatMap(linia => linia.split(" "))
