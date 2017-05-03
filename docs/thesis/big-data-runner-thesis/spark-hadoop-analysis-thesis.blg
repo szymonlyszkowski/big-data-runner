@@ -8,53 +8,48 @@ A level-1 auxiliary file: chapter-application-overview.aux
 A level-1 auxiliary file: chapter-summary.aux
 The style file: alpha.bst
 Database file #1: references.bib
-Illegal end of database file---line 125 of file references.bib
- : 
- : 
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in map_reduce_figure
 Warning--to sort, need author or key in HDFS
 Warning--to sort, need author or key in HDFS_architecture
-You've used 15 entries,
+You've used 19 entries,
             2543 wiz_defined-function locations,
-            647 strings with 7279 characters,
-and the built_in function-call counts, 6146 in all, are:
-= -- 605
-> -- 233
-< -- 13
-+ -- 79
-- -- 78
-* -- 370
-:= -- 890
-add.period$ -- 47
-call.type$ -- 15
-change.case$ -- 88
-chr.to.int$ -- 14
-cite$ -- 21
-duplicate$ -- 276
-empty$ -- 525
-format.name$ -- 93
-if$ -- 1372
+            673 strings with 7943 characters,
+and the built_in function-call counts, 7376 in all, are:
+= -- 719
+> -- 287
+< -- 15
++ -- 96
+- -- 94
+* -- 439
+:= -- 1103
+add.period$ -- 61
+call.type$ -- 19
+change.case$ -- 107
+chr.to.int$ -- 18
+cite$ -- 25
+duplicate$ -- 338
+empty$ -- 625
+format.name$ -- 115
+if$ -- 1624
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 8
-newline$ -- 81
-num.names$ -- 36
-pop$ -- 149
+missing$ -- 16
+newline$ -- 103
+num.names$ -- 48
+pop$ -- 183
 preamble$ -- 1
-purify$ -- 103
+purify$ -- 129
 quote$ -- 0
-skip$ -- 254
+skip$ -- 293
 stack$ -- 0
-substring$ -- 308
-swap$ -- 90
-text.length$ -- 13
-text.prefix$ -- 4
+substring$ -- 337
+swap$ -- 94
+text.length$ -- 15
+text.prefix$ -- 6
 top$ -- 0
-type$ -- 120
+type$ -- 136
 warning$ -- 3
-while$ -- 48
-width$ -- 16
-write$ -- 191
-(There was 1 error message)
+while$ -- 58
+width$ -- 20
+write$ -- 247
+(There were 3 warnings)

@@ -1,4 +1,5 @@
 \chapter{Badania}
+\section{Źródła danych i specyfikacja sprzętowa}
 Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis znajduje się w sekcji \ref{sec:user_interfaces}. Na potrzeby badań operacje nazwijmy następująco:
 \begin{itemize}
 	\item {Word Count}
@@ -14,7 +15,7 @@ Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Develope
 \end{itemize}
 Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla badanych operacji wykorzystywane są trzy jednostki obliczeniowe: procesor, pamięć RAM, dysk twardy.
 \newline Pomiary wydajności zostały dokonane przy pomocy programu \textbf{cURL}.\footnote{\url{https://curl.haxx.se/}} Testy obejmują siedem następujących czynników:
-\begin{itemize}
+\begin{itemize}\label{items:time-descriptions}
 	\item{Czas rozwiązywania adresu\footnote{time\_namelookup}}
 	\item{Czas połączenia TCP\footnote{time\_connect}}
 	\item{Czas wymiany informacji między połączeniami (handshake)\footnote{time\_appconnect}} 
@@ -23,6 +24,8 @@ Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla
 	\item{Czas przed którym pierwszy bajt danych miał zostać wysłany\footnote{time\_starttransfer}}
 	\item{Czas całkowity\footnote{time\_total}}
 \end{itemize}
+\todo{konfiguracja hadoop i spark - jaki tryb (lokalny), jaki tryb klastra}
+\section{Wyniki}
 Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. 
 \begin{table}[]
 	\centering
@@ -48,13 +51,13 @@ Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Czas w sekundach    & Hadoop    & Spark     \\ \hline
-		time\_namelookup    & 0.000022  & 0.000031  \\ \hline
-		time\_connect       & 0.000090  & 0.000120  \\ \hline
+		time\_namelookup    & 0.000022  & 0.000029  \\ \hline
+		time\_connect       & 0.000090  & 0.000113  \\ \hline
 		time\_appconnect    & 0.000000  & 0.000000  \\ \hline
-		time\_pretransfer   & 0.000110  & 0.000145  \\ \hline
+		time\_pretransfer   & 0.000110  & 0.000140  \\ \hline
 		time\_redirect      & 0.000000  & 0.000000  \\ \hline
-		time\_starttransfer & 42.685888 & 80.167355 \\ \hline
-		time\_total         & 42.685924 & 80.167405 \\ \hline
+		time\_starttransfer & 42.685888 & 16.489812 \\ \hline
+		time\_total         & 42.685924 & 16.489860 \\ \hline
 	\end{tabular}
 \end{table}
 Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref{tab:reject-results}.
@@ -73,5 +76,8 @@ Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref
 		time\_starttransfer & 238.408629 & 45.186254 \\ \hline
 		time\_total         & 238.408673 & 45.186296 \\ \hline
 	\end{tabular}
-\end{table} 
-\todo{przeprowadzone badania - może inny tytuł rozdziału?}
+\end{table}
+\section{Interpretacja wyników}
+Z punktu widzenia badanej wydajności wszystkie pomiary poza \textbf{time\_starttransfer} oraz \textbf{time\_total} nie są kluczowe gdyż pomijają czas pracy badanych platform. Czas całkowity jest interesujący z punktu widzenia użytkownika systemu, którego interesuje faktyczny czas uzyskania wyników. Podczas interpretacji wyników mylący może być opis przedstawiony w \ref{items:time-descriptions} \textit{Czas przed którym pierwszy bajt danych miał zostać wysłany}. Opis ten nie dotyczy danych, które są przetwarzane na badanych platformach lecz danych wysłanych przez odpowiedź na żądanie HTTP. Oznacza to, że dane odpowiedzi zostały wysłane po czasie gdy wszystkie obliczenia na platformie zostały już wykonane. W związku z tym \textbf{time\_starttransfer} może zostać uznany za czas pracy przetwarzania na danej platformie.
+\newline W związku z wynikami przedstawionymi w tabelach \ref{tab:filter-results}, \ref{tab:reject-results}, \ref{tab:word-count-results} możemy zaobserwować zależność, że platforma Spark jest zdecydowanie szybsza (od dwóch i pół do pięciu razy) jeżeli chodzi o wykonywanie obliczeń i zapis wyników do pliku w systemie HDFS.  
+\todo{koszty rekrutacji, cyclomatic complexity?}

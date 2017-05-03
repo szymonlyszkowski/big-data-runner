@@ -7,6 +7,16 @@ Professor~Joel Adams.
 \newblock \url{https://cs.calvin.edu/courses/cs/374/exercises/12/lab/}.
 \newblock Dostęp: 2017-04-09.
 
+\bibitem[BA04]{Beck:2004:EPE:1076267}
+Kent Beck and Cynthia Andres.
+\newblock {\em Extreme Programming Explained: Embrace Change (2Nd Edition)}.
+\newblock Addison-Wesley Professional, 2004.
+
+\bibitem[Bec02]{Beck:2002:TDD:579193}
+Beck.
+\newblock {\em Test Driven Development: By Example}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 2002.
+
 \bibitem[CT16]{big_data_tools}
 R.~K. Chawda and G.~Thakur.
 \newblock Big data and advanced analytics tools.
@@ -23,11 +33,19 @@ databricks.com.
 
 \bibitem[HDFa]{HDFS_architecture}
 Architektura hdfs.
+\newblock
+  \url{https://hadoop.apache.org/docs/r1.2.1/images/hdfsarchitecture.gif}.
+\newblock Dostęp: 2017-04-09.
 
 \bibitem[HDFb]{HDFS}
 Opis architektury hdfs.
 \newblock \url{https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html}.
 \newblock Dostęp: 2017-04-09.
+
+\bibitem[HT99]{Hunt:2000:PPJ:320326}
+Andrew Hunt and David Thomas.
+\newblock {\em The Pragmatic Programmer: From Journeyman to Master}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 1999.
 
 \bibitem[HYH{\etalchar{+}}16]{spark_in_memory}
 Y.~Huang, Y.~Yesha, M.~Halem, Y.~Yesha, and S.~Zhou.
@@ -62,6 +80,11 @@ Architektura map reduce.
 \newblock
   \url{http://spideropsnet.com/site1/wp-content/uploads/2014/08/MapReduce\_flow.png}.
 \newblock Dostęp: 2017-04-09.
+
+\bibitem[Mar08]{Martin:2008:CCH:1388398}
+Robert~C. Martin.
+\newblock {\em Clean Code: A Handbook of Agile Software Craftsmanship}.
+\newblock Prentice Hall PTR, Upper Saddle River, NJ, USA, 1 edition, 2008.
 
 \bibitem[MSZ14]{big_data_concept}
 P.~Michalik, J.~Stofa, and I.~Zolotova.
