@@ -1,2 +1,60 @@
-\chapter{Aplikacja użyta podczas badań}
+\chapter{Badania}
+Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis znajduje się w sekcji \ref{sec:user_interfaces}. Na potrzeby badań operacje nazwijmy następująco:
+\begin{itemize}
+	\item {Word Count}
+	\item {Filter}
+	\item {Reject}
+\end{itemize}
+Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Developer API opisanym w sekcji \ref{sec:twitter-api}. Z racji iż strumieniowanie dla platformy Spark zapisuje dane cyklicznie, powstał katalog w systemie HDFS zawierający paczki danych zapisanych co 360 sekund. Na potrzeby badań wszystkie dane pobrane ze zdalnego API zostały połączone w jeden plik o wielkości \textbf{4GB}, który posłużył za źródło danych podczas wykonywania testów wydajności. Badania zostały przeprowadzone na maszynie o specyfikacji:
+\begin{itemize}
+	\item Procesor: Intel Core i7-4702MQ (2.2GHz Quad-core + HT) 
+	\item Pamięć RAM: 16GB
+	\item Pamięć masowa: 1 TB 5400rpm\footnote{Revolutions per minute - obroty na minutę} SATA
+	\item Karta graficzna: NVIDIA GeForce GT 750M (2G)  
+\end{itemize}
+Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla badanych operacji wykorzystywane są trzy jednostki obliczeniowe: procesor, pamięć RAM, dysk twardy.
+\newline Pomiary wydajności zostały dokonane przy pomocy programu \textbf{cURL}.\footnote{\url{https://curl.haxx.se/}} Testy obejmują siedem następujących czynników:
+\begin{itemize}
+	\item{Czas rozwiązywania adresu\footnote{time\_namelookup}}
+	\item{Czas połączenia TCP\footnote{time\_connect}}
+	\item{Czas wymiany informacji między połączeniami (handshake)\footnote{time\_appconnect}} 
+	\item{Czas całkowity przed wymianą informacji\footnote{time\_pretransfer}}
+	\item{Czas przekierowań\footnote{time\_redirect}}
+	\item{Czas przed którym pierwszy bajt danych miał zostać wysłany\footnote{time\_starttransfer}}
+	\item{Czas całkowity\footnote{time\_total}}
+\end{itemize}
+Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results} 
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności dla zliczania ilości wystąpień poszczególnych fraz tekstowych (oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku}
+	\label{tab:word-count-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas w sekundach    & Hadoop     & Spark      \\ \hline
+		time\_namelookup    & 0.000020   & 0.000023   \\ \hline
+		time\_connect       & 0.000097   & 0.000116   \\ \hline
+		time\_appconnect    & 0.000000   & 0.000000   \\ \hline
+		time\_pretransfer   & 0.000116   & 0.000134   \\ \hline
+		time\_redirect      & 0.000000   & 0.000000   \\ \hline
+		time\_starttransfer & 402.792577 & 111.232410 \\ \hline
+		time\_total         & 402.792625 & 111.232446 \\ \hline
+	\end{tabular}
+\end{table}
+Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref{tab:filter-results}
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności dla zliczania ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika}
+	\label{tab:filter-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas w sekundach    & Hadoop    & Spark     \\ \hline
+		time\_namelookup    & 0.000022  & 0.000031  \\ \hline
+		time\_connect       & 0.000090  & 0.000120  \\ \hline
+		time\_appconnect    & 0.000000  & 0.000000  \\ \hline
+		time\_pretransfer   & 0.000110  & 0.000145  \\ \hline
+		time\_redirect      & 0.000000  & 0.000000  \\ \hline
+		time\_starttransfer & 42.685888 & 80.167355 \\ \hline
+		time\_total         & 42.685924 & 80.167405 \\ \hline
+	\end{tabular}
+\end{table} 
 \todo{przeprowadzone badania - może inny tytuł rozdziału?}
