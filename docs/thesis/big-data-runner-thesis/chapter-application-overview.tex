@@ -23,7 +23,7 @@ Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla
 	\item{Czas przed którym pierwszy bajt danych miał zostać wysłany\footnote{time\_starttransfer}}
 	\item{Czas całkowity\footnote{time\_total}}
 \end{itemize}
-Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results} 
+Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. 
 \begin{table}[]
 	\centering
 	\caption{Wyniki wydajności dla zliczania ilości wystąpień poszczególnych fraz tekstowych (oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku}
@@ -40,7 +40,7 @@ Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli 
 		time\_total         & 402.792625 & 111.232446 \\ \hline
 	\end{tabular}
 \end{table}
-Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref{tab:filter-results}
+Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref{tab:filter-results}.
 \begin{table}[]
 	\centering
 	\caption{Wyniki wydajności dla zliczania ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika}
@@ -55,6 +55,23 @@ Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref
 		time\_redirect      & 0.000000  & 0.000000  \\ \hline
 		time\_starttransfer & 42.685888 & 80.167355 \\ \hline
 		time\_total         & 42.685924 & 80.167405 \\ \hline
+	\end{tabular}
+\end{table}
+Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref{tab:reject-results}.
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności odrzucenia linii zawierających frazę tekstową zdefiniowaną przez użytkownika oraz zapisania wyniku do pliku}
+	\label{tab:reject-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas w sekundach    & Hadoop     & Spark     \\ \hline
+		time\_namelookup    & 0.000025   & 0.000049  \\ \hline
+		time\_connect       & 0.000098   & 0.000184  \\ \hline
+		time\_appconnect    & 0.000000   & 0.000000  \\ \hline
+		time\_pretransfer   & 0.000118   & 0.000237  \\ \hline
+		time\_redirect      & 0.000000   & 0.000000  \\ \hline
+		time\_starttransfer & 238.408629 & 45.186254 \\ \hline
+		time\_total         & 238.408673 & 45.186296 \\ \hline
 	\end{tabular}
 \end{table} 
 \todo{przeprowadzone badania - może inny tytuł rozdziału?}
