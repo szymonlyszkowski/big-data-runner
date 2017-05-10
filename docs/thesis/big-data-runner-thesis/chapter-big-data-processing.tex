@@ -60,7 +60,7 @@ map(k1,v1) \to list(k2,v2)
 reduce(k2, list (v2)) \to list (v3)
 \end{equation}
 gdzie \textit{map} przyjmuje problem $k1$ z dziedziny $v1$ i zwraca listę podproblemów $k2$ z dziedziny $v2$. Następnie MR zbiera wszystkie pary z tym samym kluczem $k2$ ze wszystkich list i grupuje je razem tworząc jedną grupę dla każdego klucza. Operacja \textit{reduce} jest wykonywana równolegle ($list(v2)$) dla każdej grupy. Wynikiem jest lista wartości $v3$, która może być pusta.\cite{map_reduce_microsoft_article}
-\newline Przykładowa implementacja dla zliczania ilości poszczególnych słów w danym dokumencie dla języka scala jest przedstawiona w listingu \ref{lst:scala_word_count}.
+\newline Przykładowa implementacja dla zliczania ilości poszczególnych słów w danym dokumencie dla języka Scala jest przedstawiona w listingu \ref{lst:scala_word_count}.
 \begin{lstlisting}[language=scala, caption={Przykład "Word Count"},captionpos=b, label={lst:scala_word_count}]
 //Transformacja struktury danych
 val slowa = plik_wejsciowy.flatMap(linia => linia.split(" "))
@@ -100,11 +100,12 @@ Koherentność danych zapewnia łatwość w testowaniu i użytkowaniu - raz stwo
 	\label{fig:@=hdfs_architecture}
 \end{figure}
 \newline W kontekście analizy porównawczej Apache Spark i Apache Hadoop musi być zastosowany HDFS. Jest to jedyne źródło danych, na którym mogą operować obydwie platformy (Spark może pobierać dane również z innych źródeł baz typu NoSQL\footnote{Not only SQL - nierelacyjne bazy danych}).
+\todo{section RDD?}
 \section{Operacje - przypadki użycia w architekturze równoległej}
 Występuje bardzo dużo zastosowań w przypadku analizy danych na platformach równoległych. Najpopularniejsze to:
 \begin{itemize}
 	\item Monitorowanie transakcji bankowych - selekcja tych transferów, które mogą być nielegalne dla pracownika banku
 	\item Analiza plików logowania
 	\item Analiza trendów rynkowych np. najpopularniejsze filmy w serwisie Netflix\footnote{www.netflix.com}
-	\item Migracja danych między centrami w różnych lokalizacjach. Map zapewni transfer małych porcji danych w sieci, reduce zadba o złączenie wcześniej wysłanych danych oraz sprawdzenie czy nie uległy modyfikacji. 
+	\item Migracja danych między centrami w różnych lokalizacjach. Map zapewni transfer małych porcji danych w sieci, reduce zadba o złączenie wcześniej wysłanych danych oraz sprawdzenie czy nie uległy modyfikacji/regresji (np. poprzez sprawdzanie sumy kontrolnej). 
 \end{itemize}

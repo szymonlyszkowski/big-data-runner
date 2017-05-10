@@ -2,7 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 
 #Endpoints accessing Twitter API
-GET     /api/spark/live/list                    controllers.spark.live.LiveTweetResourcesSparkController.listSampleTweets
+GET     /api/spark/live/list/start              controllers.spark.live.LiveTweetResourcesSparkController.listSampleTweets
 GET     /api/spark/live/list/stop               controllers.spark.live.LiveTweetResourcesSparkController.stopStreaming
 
 #Endpoints using HDFS & Spark
