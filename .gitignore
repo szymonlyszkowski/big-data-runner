@@ -36,3 +36,6 @@ server.pid
 *.pdf
 *.synctex.gz
 *.lot
+*.bbl
+*.lof
+*.blg
