@@ -100,7 +100,38 @@ Koherentność danych zapewnia łatwość w testowaniu i użytkowaniu - raz stwo
 	\label{fig:@=hdfs_architecture}
 \end{figure}
 \newline W kontekście analizy porównawczej Apache Spark i Apache Hadoop musi być zastosowany HDFS. Jest to jedyne źródło danych, na którym mogą operować obydwie platformy (Spark może pobierać dane również z innych źródeł baz typu NoSQL\footnote{Not only SQL - nierelacyjne bazy danych}).
-\todo{section RDD?}
+
+\section{RDD}
+Platforma Spark udostępnia w swoim interfejsie programistycznym RDD\footnote{Resilient Distributed Dataset}. Jest to pojęcie, które definiuje pewien poziom abstrakcji. Można uznać, że imituje kolekcję o szczególnych właściwościach z języka Java lub Scala. Głównymi założeniami RDD są\cite{Zaharia:2012:RDD:2228298.2228301}:
+\begin{itemize}
+	\item Niepodzielność oraz rozproszony stan zbioru\footnote{Immutability and partitioning}
+	\item Dostępność dedykowanych transformacji\footnote{Coarse-grained transformations}
+	\item Odporność na błędy\footnote{Fault tolerance}
+	\item Leniwa ewaluacja\footnote{Lazy evaluations}
+	\item Trwałość danych\footnote{Persistence}	
+\end{itemize}
+\textbf{Niepodzielność zbioru danych} jest kluczowa w przypadku przetwarzania rozproszonego, gdyż zapobiega konieczności synchronizowana stanów danych. Działając na niepodzielnych jednostkach danych możemy w łatwy sposób je przetwarzać (tworzyć nowe niepodzielne zbiory danych na podstawie zbiorów wejściowych). Jednocześnie przyjmujemy, że dany zbiór danych nie znajduje się w jednej lokacji co de-facto wymusza niepodzielność i jednocześnie zapewnia łatwy interfejs programistyczny, odciążający programistę z konieczności zagłębiania się w strukturę danych. 
+\newline Z racji swojej niepodzielności dostępne są \textbf{transformacje}, które są możliwe do wykonania na całym zbiorze danych równolegle np. \textit{map, filter, groupBy}. Takie podejście bardzo ułatwia zrównoleglenie operacji, jak również pozwala na rejestrację historii\footnote{lineage}. Dzięki temu w niektórych przypadkach uszkodzone dane mogą zostać odtworzone na podstawie ciągu dokonanych wcześniej operacji, zamiast być kopiowane z repliki. Takie podejście pozwala na oszczędności w postaci nośników danych. Historia jest kluczowym elementem dla \textbf{odporności na błędy} - bezpieczeństwa danych.
+\newline \textbf{Leniwa ewaluacja} jest implikacją niepodzielności oraz transformacji. Użytkownik może definiować ciągi wybranych transformacji i jednocześnie kontrolować moment ich wykonania. Transformacje są leniwe co oznacza, że sama ich deklaracja nie spowoduje ich wykonania. Dopiero wywołanie akcji/operacji bądź zapisu do pamięci masowej powoduje wykonanie transformacji. Dzięki temu użytkownik może dowolnie formować dane bez konieczności interakcji z operacjami wejścia-wyjścia.
+\newline \textbf{Trwałość danych} - jest to strategia, którą użytkownik może wybrać dla przechowywania RDD. Dzięki temu możliwe jest optymalizowanie przetwarzania danych bądź obliczeń w zależności od potrzeb lub możliwych zasobów.  
+\begin{table}[]
+
+	\centering
+	\caption{Tabela najpopularniejszych strategi przechowywania danych dla zbioru RDD.}
+	\label{RDD-strategy}
+	\begin{tabular}{|l|l|}
+		\hline
+		Strategia                             & Znaczenie                                                                                                                                                                                     \\ \hline
+		Pamięć RAM                            & RDD jest przechowywane jako zdeserializowany obiekt Java, jeżeli RDD wychodzi poza dostępną pamięć  RDD jest obliczane dynamicznie za każdym odwołaniem. Strategia domyślna.                  \\ \hline
+		Pamięć RAM i dysk twardy              & RDD jest przechowywane jako zdeserializowany obiekt Java, jeżeli RDD,wychodzi poza dostępną pamięć,RDD jest przechowywane na dysku twardym i stamtąd są pobierane.                            \\ \hline
+		Pamięć RAM serializacja               & Działa tak samo jak strategia Pamięć RAM, lecz używa obiektów zserializowanych. Najefektywniejsza strategia jeżeli chodzi o czas wykonania obliczeń, jednocześnie wymaga wydajnego procesora. \\ \hline
+		Pamięć RAM i dysk twardy serializacja & Działa tak samo jak strategia Pamięć RAM i dysk twardy, lecz używa obiektów zserializowanych.                                                                                                 \\ \hline
+		Dysk twardy                           & Przechowuje RDD wyłącznie na dysku twardym.                                                                                                                                                   \\ \hline
+	\end{tabular}
+
+\end{table}
+Najpopularniejsze strategie dla implementacji Java i Scala są przedstawione w tabeli \ref{RDD-strategy}. Dodatkowe strategie są opublikowane w dokumentacji Apache Spark pod adresem: \url{http://spark.apache.org/docs/latest/programming-guide.html#rdd-persistence}. Możliwości jakie oferuje RDD są o wiele większe niż te, które są dostępne w Apache Hadoop. Hadoop to czysta implementacja paradygmatu map reduce, która nie pozwala na łączenie wielu zachowań w jeden chronologiczny ciąg zdarzeń\footnote{Pipeline}. Hadoop pozwala jedynie na zrównoleglenie jednego zachowania zdefiniowanego przez użytkownika i zapisanie wyniku w pamięci masowej. Jeżeli użytkownik chce połączyć dwa lub więcej zachowań ze sobą jest zmuszony do ich zapisu i ponownego odczytu. Takie podejście zdecydowanie utrudnia implementację oraz może mieć znaczący wpływ na prędkość uzyskiwania wyników dostarczanych przez platformę. 
+
 \section{Operacje - przypadki użycia w architekturze równoległej}
 Występuje bardzo dużo zastosowań w przypadku analizy danych na platformach równoległych. Najpopularniejsze to:
 \begin{itemize}

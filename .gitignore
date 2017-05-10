@@ -35,3 +35,4 @@ server.pid
 *.aux
 *.pdf
 *.synctex.gz
+*.lot
