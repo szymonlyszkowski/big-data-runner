@@ -101,7 +101,7 @@ Koherentność danych zapewnia łatwość w testowaniu i użytkowaniu - raz stwo
 \end{figure}
 \newline W kontekście analizy porównawczej Apache Spark i Apache Hadoop musi być zastosowany HDFS. Jest to jedyne źródło danych, na którym mogą operować obydwie platformy (Spark może pobierać dane również z innych źródeł baz typu NoSQL\footnote{Not only SQL - nierelacyjne bazy danych}).
 
-\section{RDD}
+\section{RDD}\label{rdd-section}
 Platforma Spark udostępnia w swoim interfejsie programistycznym RDD\footnote{Resilient Distributed Dataset}. Jest to pojęcie, które definiuje pewien poziom abstrakcji. Można uznać, że imituje kolekcję o szczególnych właściwościach z języka Java lub Scala. Głównymi założeniami RDD są\cite{Zaharia:2012:RDD:2228298.2228301}:
 \begin{itemize}
 	\item Niepodzielność oraz rozproszony stan zbioru\footnote{Immutability and partitioning}
