@@ -67,7 +67,28 @@ val sparkContext = new SparkContext(conf)
 val streamingContext = new StreamingContext(sparkContext, Seconds(360))
 }
 \end{lstlisting} 
-\todo{konfiguracja hadoop i spark - jaki tryb (lokalny), jaki tryb klastra}
+Apache Hadoop może być uruchamiany w trzech trybach: pojedynczy proces JVM (\textit{Standalone Operation)}, pseudo rozproszony \textit{Pseudo-Distributed Operation}, w pełni rozproszony \textit{Fully-Distributed Operation}. Aby konfiguracja była jak najbardziej podobna do konfiguracji Spark, Hadoop został uruchomiony w trybie pseudo rozproszonym. W takim przypadku Apache Hadoop nie jest konfigurowany przez kod źródłowy, lecz przez pliki konfiguracyjne XML. Konfiguracja Apache Hadoop jest przedstawiona na listingach \ref{lst:core-site} i \ref{lst:hdfs-site}.
+\begin{lstlisting}[language=XML, label={lst:hdfs-site},captionpos=b, caption={Konfigracja Apache Hadoop dla trybu pseudo rozproszonego. Plik hdfs-site.xml}]
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>4</value>
+	</property>
+</configuration>
+\end{lstlisting}
+\begin{lstlisting}[language=XML, label={lst:core-site}, captionpos=b, caption={Konfigracja Apache Hadoop dla trybu pseudo rozproszonego. Plik core-site.xml}, float]
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://127.0.0.1:8080</value>
+	</property>
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/home/szymonidas/tweets-hdfs/</value>
+	</property>
+</configuration>
+\end{lstlisting}
+Poza adresem Apache Hadoop, został zdefiniowany katalog na dysku twardym, gdzie HDFS będzie przechowywał swoje dane. Hadoop podobnie jak Spark został ustawiony na partycjonowanie danych w czterech częściach.
 \section{Wyniki}
 Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. 
 \begin{table}[]
