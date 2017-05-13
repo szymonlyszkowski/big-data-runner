@@ -37,7 +37,7 @@ W linii nr 1 następuje konfiguracja dostępu do Twitter Developer API przy uży
 \end{itemize}
 Dokładna struktura danych jest przedstawiona w listingu: \ref{lst:tweet-json}
 \lstinputlisting[language=json,firstnumber=1, label={lst:tweet-json}, captionpos=b, caption={Przykładowa struktura danych pobrana z Twitter Developer API, użyta podczas badań.}]{tweet.json}  
-\section{Specyfikacja sprzętowa}
+\section{Specyfikacja sprzętowa i konfiguracja platform}
 Badania zostały przeprowadzone na maszynie o specyfikacji:
 \begin{itemize}
 	\item Procesor: Intel Core i7-4702MQ (2.2GHz Quad-core + HT) 
@@ -56,6 +56,17 @@ Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla
 	\item{Czas przed którym pierwszy bajt danych miał zostać wysłany\footnote{time\_starttransfer}}
 	\item{Czas całkowity\footnote{time\_total}}
 \end{itemize}
+Obydwie platformy pozwalają na szczegółową konfigurację instalacji. Z racji iż testy były wykonywane na jednej i tej samej maszynie należało ustawić sztuczny(wirtualny) klaster. Oznacza to, że na maszynie było imitowane rozproszone środowisko obliczeniowe. Dla Apache Spark tryb lokalny został ustawiony na maksymalną możliwą liczbę dostępnych wątków wirtualnej maszyny Java - oznacza to, że liczba zwróconych dostępnych wątków przez metodę przedstawioną na listingu \ref{lst:jvm-threads-access} definiuje ile operacji Apache Spark może wykonywać w tej samej jednostce czasu. Konfiguracja jest widoczna na listingu \ref{lst:spark-cluster-config}. Konfiguracja pozwala na tworzenie kontekstu dla zapytań o dane statyczne (na przykład baza danych), jak również o charakterze dynamicznym (strumieniowanie). Jak widać na listingu \ref{lst:spark-cluster-config} w linii 4 ustawiany jest również cykl zapisu danych dynamicznych (zapis 360 sekund).
+\begin{lstlisting}[language=scala, caption={Metoda zwracająca liczbę dostępnych wątków wirtualnej maszyny Java},captionpos=b, label={lst:jvm-threads-access}]
+Runtime.getRuntime.availableProcessors() 
+\end{lstlisting}
+\begin{lstlisting}[language=scala, caption={Konfigracja klastra dla Apache Spark},captionpos=b, label={lst:spark-cluster-config}]
+object SparkStreaming {
+val conf = new SparkConf().setMaster("local[*]").setAppName("big-data-runner-spark-driver-application")
+val sparkContext = new SparkContext(conf)
+val streamingContext = new StreamingContext(sparkContext, Seconds(360))
+}
+\end{lstlisting} 
 \todo{konfiguracja hadoop i spark - jaki tryb (lokalny), jaki tryb klastra}
 \section{Wyniki}
 Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. 
