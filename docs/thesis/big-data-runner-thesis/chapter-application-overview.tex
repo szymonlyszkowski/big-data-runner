@@ -26,7 +26,17 @@ outputRDD.saveAsTextFile(config.getString("hadoop-tweets-url").get + "tweet_" + 
 })
 SparkStreaming.streamingContext.start()
 \end{lstlisting}
-W linii nr 1 następuje konfiguracja dostępu do Twitter Developer API przy użyciu biblioteki Twitter4J\footnote{\url{http://twitter4j.org}}. Linia nr 2 to deklaracja strumienia, ustawienia autoryzacji dla Twitter Developer API oraz konfiguracja formatu zapisu danych. Linie nr 3,4,5 to konfiguracja samego zapisu w systemie HDFS, ustalana jest ilość partycji, na których ma zostać zapisane RDD oraz jak ma nazywać się wynikowy plik w HDFS. Linia nr 8 rozpoczyna faktyczne strumieniowanie danych oraz ich zapis.  
+W linii nr 1 następuje konfiguracja dostępu do Twitter Developer API przy użyciu biblioteki Twitter4J\footnote{\url{http://twitter4j.org}}. Linia nr 2 to deklaracja strumienia, ustawienia autoryzacji dla Twitter Developer API oraz konfiguracja formatu zapisu danych. Linie nr 3,4,5 to konfiguracja samego zapisu w systemie HDFS, ustalana jest ilość partycji, na których ma zostać zapisane RDD oraz jak ma nazywać się wynikowy plik w HDFS. Linia nr 8 rozpoczyna faktyczne strumieniowanie danych oraz ich zapis.
+\newline Struktura danych zwracana z Twitter Developer API w formacie JSON zawiera bardzo dużo informacji. Jedne z najbardziej kluczowych są przedstawione w liście \ref{items:tweet-fields}
+\begin{itemize}\label{items:tweet-fields}
+	\item Data utworzenia\footnote{createdAt}
+	\item Udostępnienia tweet'a \footnote{retweetedStatus}
+	\item Zawartość tweet'a\footnote{text}
+	\item Autor\footnote{user}
+	\item Flaga prawda/fałsz dotycząca treści wrażliwych\footnote{isPossiblySensitive}
+\end{itemize}
+Dokładna struktura danych jest przedstawiona w listingu:
+  
 \section{Specyfikacja sprzętowa}
 Badania zostały przeprowadzone na maszynie o specyfikacji:
 \begin{itemize}
