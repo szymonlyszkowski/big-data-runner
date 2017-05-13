@@ -1,12 +1,23 @@
 \chapter{Badania}
-\section{Źródła danych i specyfikacja sprzętowa}
-Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis znajduje się w sekcji \ref{sec:user_interfaces}. Na potrzeby badań operacje nazwijmy następująco:
+\section{Źródła danych}
+Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis dostępu do danych znajduje się w sekcji \ref{sec:user_interfaces}. 
+Na potrzeby badań operacje nazwijmy następująco:
 \begin{itemize}
 	\item {Word Count}
 	\item {Filter}
 	\item {Reject}
 \end{itemize}
-Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Developer API opisanym w sekcji \ref{sec:twitter-api}. Z racji iż strumieniowanie dla platformy Spark zapisuje dane cyklicznie, powstał katalog w systemie HDFS zawierający paczki danych zapisanych co 360 sekund. Na potrzeby badań wszystkie dane pobrane ze zdalnego API zostały połączone w jeden plik o wielkości \textbf{4GB}, który posłużył za źródło danych podczas wykonywania testów wydajności. Badania zostały przeprowadzone na maszynie o specyfikacji:
+Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Developer API opisanym w sekcji \ref{sec:twitter-api}. Z racji iż strumieniowanie dla platformy Spark zapisuje dane cyklicznie, powstał katalog w systemie HDFS zawierający paczki danych zapisanych co 360 sekund. Na potrzeby badań wszystkie dane pobrane ze zdalnego API zostały połączone w jeden plik o wielkości \textbf{4GB}, który posłużył za źródło danych podczas wykonywania testów wydajności. Twitter Developer API nie jest standardowym webowym interfejsem typu REST\footnote{Representational state transfer}. Nie występuje tutaj standardowy scenariusz zapytanie do serwera, odpowiedź serwera. W przypadku danych strumieniowych, klient wysyła zapytanie do aplikacji, aplikacja wysyła zapytanie do serwerów Twitter i czeka na odpowiedź serwera asynchronicznie. Klient wysyłając jedynie żądanie nie blokuje samego interfejsu aplikacji. W związku z tym może występować złudzenie iż klient nie posiada kontroli nad samym pobieraniem danych, gdyż raz wysłane żądanie nie może zostać przerwane. Aplikacja sama zarządza procesem pobierania/strumieniowania danych. Architektura o podobnej strategii jest proponowana również przez twórców samego Twitter Developer API i jest zaprezentowana na pod adresem: \url{https://dev.twitter.com/streaming/overview}.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.5]{twitter-api-connection.png}
+	\caption{Architektura procesu pobierania danych z Twitter Developer API}
+	\label{fig:@=twitter-api-connection}
+\end{figure}
+Proces strumieniowania danych z Twitter Developer API został przedstawiony na rysunku \ref{fig:@=twitter-api-connection}.
+
+\section{Specyfikacja sprzętowa}
+Badania zostały przeprowadzone na maszynie o specyfikacji:
 \begin{itemize}
 	\item Procesor: Intel Core i7-4702MQ (2.2GHz Quad-core + HT) 
 	\item Pamięć RAM: 16GB

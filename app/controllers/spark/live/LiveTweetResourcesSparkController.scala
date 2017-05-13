@@ -19,7 +19,6 @@ class LiveTweetResourcesSparkController @Inject() (config: play.api.Configuratio
   def listSampleTweets = Action {
     val twitterInstance = new Twitter4JConfiguration(config).getTwitter4JAccess()
     val tweetStream = TwitterUtils.createStream(SparkStreaming.streamingContext, Option(twitterInstance.getAuthorization)).map(new Gson().toJson(_))
-    var numTweetsCollected: Long = 0
     tweetStream.foreachRDD((rdd, time) => {
         val outputRDD = rdd.repartition(4)
         outputRDD.saveAsTextFile(config.getString("hadoop-tweets-url").get + "tweet_" + time.milliseconds.toString)

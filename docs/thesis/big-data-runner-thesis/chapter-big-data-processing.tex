@@ -115,11 +115,9 @@ Platforma Spark udostępnia w swoim interfejsie programistycznym RDD\footnote{Re
 \newline \textbf{Leniwa ewaluacja} jest implikacją niepodzielności oraz transformacji. Użytkownik może definiować ciągi wybranych transformacji i jednocześnie kontrolować moment ich wykonania. Transformacje są leniwe co oznacza, że sama ich deklaracja nie spowoduje ich wykonania. Dopiero wywołanie akcji/operacji bądź zapisu do pamięci masowej powoduje wykonanie transformacji. Dzięki temu użytkownik może dowolnie formować dane bez konieczności interakcji z operacjami wejścia-wyjścia.
 \newline \textbf{Trwałość danych} - jest to strategia, którą użytkownik może wybrać dla przechowywania RDD. Dzięki temu możliwe jest optymalizowanie przetwarzania danych bądź obliczeń w zależności od potrzeb lub możliwych zasobów.  
 \begin{table}[]
-
 	\centering
 	\caption{Tabela najpopularniejszych strategi przechowywania danych dla zbioru RDD.}
 	\label{RDD-strategy}
-	%\begin{tabularx}{\textwidth}{|l|X|}
 	\begin{tabular}{|l|p{6.5cm}|}
 		\hline
 		Strategia                             & Znaczenie                                                                                                                                                                                     \\ \hline
@@ -129,7 +127,6 @@ Platforma Spark udostępnia w swoim interfejsie programistycznym RDD\footnote{Re
 		Pamięć RAM i dysk twardy serializacja & Działa tak samo jak strategia Pamięć RAM i dysk twardy, lecz używa obiektów zserializowanych.                                                                                                 \\ \hline
 		Dysk twardy                           & Przechowuje RDD wyłącznie na dysku twardym.                                                                                                                                                   \\ \hline
 	\end{tabular}
-
 \end{table}
 Najpopularniejsze strategie dla implementacji Java i Scala są przedstawione w tabeli \ref{RDD-strategy}. Dodatkowe strategie są opublikowane w dokumentacji Apache Spark pod adresem: \url{http://spark.apache.org/docs/latest/programming-guide.html#rdd-persistence}. Możliwości jakie oferuje RDD są o wiele większe niż te, które są dostępne w Apache Hadoop. Hadoop to czysta implementacja paradygmatu map reduce, która nie pozwala na łączenie wielu zachowań w jeden chronologiczny ciąg zdarzeń\footnote{Pipeline}. Hadoop pozwala jedynie na zrównoleglenie jednego zachowania zdefiniowanego przez użytkownika i zapisanie wyniku w pamięci masowej. Jeżeli użytkownik chce połączyć dwa lub więcej zachowań ze sobą jest zmuszony do ich zapisu i ponownego odczytu. Takie podejście zdecydowanie utrudnia implementację oraz może mieć znaczący wpływ na prędkość uzyskiwania wyników dostarczanych przez platformę. 
 
