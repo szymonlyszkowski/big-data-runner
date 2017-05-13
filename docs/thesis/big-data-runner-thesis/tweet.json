@@ -1,0 +1,168 @@
+{
+  "createdAt": "Apr 19, 2017 8:38:00 PM",
+  "id": 854766045382320128,
+  "text": "RT @GTCBMB0512: $#BamBam$ ",
+  "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+  "isTruncated": false,
+  "inReplyToStatusId": -1,
+  "inReplyToUserId": -1,
+  "isFavorited": false,
+  "isRetweeted": false,
+  "favoriteCount": 0,
+  "retweetCount": 0,
+  "isPossiblySensitive": false,
+  "lang": "th",
+  "contributorsIDs": [],
+  "retweetedStatus": {
+    "createdAt": "Apr 19, 2017 9:10:43 AM",
+    "id": 854593084968943616,
+    "text": "#BamBam https://t.co/TsHsGMWHLG",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "isTruncated": true,
+    "inReplyToStatusId": -1,
+    "inReplyToUserId": -1,
+    "isFavorited": false,
+    "isRetweeted": false,
+    "favoriteCount": 194,
+    "retweetCount": 703,
+    "isPossiblySensitive": false,
+    "lang": "th",
+    "contributorsIDs": [],
+    "userMentionEntities": [],
+    "urlEntities": [
+      {
+        "url": "https://t.co/TsHsGMWHLG",
+        "expandedURL": "https://twitter.com/i/web/status/854593084968943616",
+        "displayURL": "https://twitter.com/i/web/status/8",
+        "start": 113,
+        "end": 136
+      }
+    ],
+    "hashtagEntities": [
+      {
+        "text": "BamBam",
+        "start": 100,
+        "end": 107
+      },
+      {
+        "text": "bam",
+        "start": 108,
+        "end": 111
+      }
+    ],
+    "mediaEntities": [],
+    "extendedMediaEntities": [],
+    "symbolEntities": [],
+    "currentUserRetweetId": -1,
+    "user": {
+      "id": 3029365162,
+      "name": "VeryImportantPerson",
+      "screenName": "GTCBMB0512",
+      "location": "Bangkok, Seoul",
+      "description": "#VIP 2006-Forever #BIGBANG10 #GTOP #EXO #GOT7 #2NE1 #WaitingForTOP GOT7 SongJoongKi KimHyunJoong BTS. Nice to meet you.",
+      "descriptionURLEntities": [],
+      "isContributorsEnabled": false,
+      "profileImageUrl": "http://pbs.twimg.com/profile_images/854604804265459712/Br1PACxm_normal.jpg",
+      "profileImageUrlHttps": "https://pbs.twimg.com/profile_images/854604804265459712/Br1PACxm_normal.jpg",
+      "isDefaultProfileImage": false,
+      "isProtected": false,
+      "followersCount": 893,
+      "profileBackgroundColor": "C0DEED",
+      "profileTextColor": "333333",
+      "profileLinkColor": "1DA1F2",
+      "profileSidebarFillColor": "DDEEF6",
+      "profileSidebarBorderColor": "C0DEED",
+      "profileUseBackgroundImage": true,
+      "isDefaultProfile": true,
+      "showAllInlineMedia": false,
+      "friendsCount": 2170,
+      "createdAt": "Feb 11, 2015 3:43:56 AM",
+      "favouritesCount": 4687,
+      "utcOffset": -1,
+      "profileBackgroundImageUrl": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profileBackgroundImageUrlHttps": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profileBannerImageUrl": "https://pbs.twimg.com/profile_banners/3029365162/1489589537",
+      "profileBackgroundTiled": false,
+      "lang": "th",
+      "statusesCount": 11577,
+      "isGeoEnabled": true,
+      "isVerified": false,
+      "translator": false,
+      "listedCount": 6,
+      "isFollowRequestSent": false
+    },
+    "quotedStatusId": -1
+  },
+  "userMentionEntities": [
+    {
+      "name": "VeryImportantPerson",
+      "screenName": "GTCBMB0512",
+      "id": 3029365162,
+      "start": 3,
+      "end": 14
+    }
+  ],
+  "urlEntities": [
+    {
+      "url": "",
+      "expandedURL": "",
+      "displayURL": "",
+      "start": 129,
+      "end": 129
+    }
+  ],
+  "hashtagEntities": [
+    {
+      "text": "BamBam",
+      "start": 116,
+      "end": 123
+    },
+    {
+      "text": "bam",
+      "start": 124,
+      "end": 127
+    }
+  ],
+  "mediaEntities": [],
+  "extendedMediaEntities": [],
+  "symbolEntities": [],
+  "currentUserRetweetId": -1,
+  "user": {
+    "id": 825736342290124800,
+    "name": "oz-kikiki",
+    "screenName": "oz_kikiki",
+    "description": "oz_kikiki ^^",
+    "descriptionURLEntities": [],
+    "isContributorsEnabled": false,
+    "profileImageUrl": "http://pbs.twimg.com/profile_images/851106157284306944/pnnrt7C-_normal.jpg",
+    "profileImageUrlHttps": "https://pbs.twimg.com/profile_images/851106157284306944/pnnrt7C-_normal.jpg",
+    "isDefaultProfileImage": false,
+    "isProtected": false,
+    "followersCount": 19,
+    "profileBackgroundColor": "000000",
+    "profileTextColor": "000000",
+    "profileLinkColor": "1B95E0",
+    "profileSidebarFillColor": "000000",
+    "profileSidebarBorderColor": "000000",
+    "profileUseBackgroundImage": false,
+    "isDefaultProfile": false,
+    "showAllInlineMedia": false,
+    "friendsCount": 89,
+    "createdAt": "Jan 29, 2017 5:04:20 PM",
+    "favouritesCount": 188,
+    "utcOffset": -25200,
+    "timeZone": "Pacific Time (US & Canada)",
+    "profileBackgroundImageUrl": "http://abs.twimg.com/images/themes/theme1/bg.png",
+    "profileBackgroundImageUrlHttps": "https://abs.twimg.com/images/themes/theme1/bg.png",
+    "profileBannerImageUrl": "https://pbs.twimg.com/profile_banners/825736342290124800/1490367058",
+    "profileBackgroundTiled": false,
+    "lang": "th",
+    "statusesCount": 2394,
+    "isGeoEnabled": false,
+    "isVerified": false,
+    "translator": false,
+    "listedCount": 2,
+    "isFollowRequestSent": false
+  },
+  "quotedStatusId": -1
+}
