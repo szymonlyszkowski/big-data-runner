@@ -1,6 +1,6 @@
 \chapter{Badania}
 \section{Źródła danych}
-Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis dostępu do danych znajduje się w sekcji \ref{sec:user_interfaces}. 
+Podczas badań zostały przeprowadzone testy wydajności dla trzech operacji, które są reprezentowane przez końcowy interfejs użytkownika. Dokładny opis dostępu do danych jak i ich struktury znajduje się w sekcji \ref{sec:twitter-api} oraz \ref{sec:tweet-structure}. Szczegółowa definicja operacji znajduję się w sekcji \ref{sec:user_interfaces}. 
 Na potrzeby badań operacje nazwijmy następująco:
 \begin{itemize}
 	\item {Word Count}
@@ -15,7 +15,7 @@ Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Develope
 	\label{fig:@=twitter-api-connection}
 \end{figure}
 Proces strumieniowania danych z Twitter Developer API został przedstawiony na rysunku \ref{fig:@=twitter-api-connection}.
-\section{Struktura danych}
+\section{Struktura danych}\label{sec:tweet-structure}
 Dane pobrane z Twitter Developer API są zapisywane w systemie plików HDFS, który jest skonfigurowany z główną aplikacją. Dane są przyjmowane jako \textit{DStream}\footnote{Discretized Stream}, który jest główną warstwą abstrakcji dla strumieniowania danych. Wewnętrznie jest to ciąg stale napływających danych w formule RDD, szczegóły na temat RDD można znaleźć w sekcji\ref{rdd-section}. Następnie na napływających danych jest wywołana funkcja \textit{map}, która zapisuje równolegle rozproszony zbiór danych w systemie HDFS. Zapisanie jest dokonane w formacie JSON\footnote{JavaScript Object Notation}. JSON został wybrany ze względu na prostą strukturę i przystępną dla ludzkiego oka prezentację. Otwarcie strumieniowania jest przestawione w listingu \ref{lst:twitter-streaming-scala}  
 \begin{lstlisting}[language=scala, caption={Otwarcie strumieniowania Twitter Developer API oraz zapis do HDFS},captionpos=b, label={lst:twitter-streaming-scala}]
 val twitterInstance = new Twitter4JConfiguration(config).getTwitter4JAccess()
@@ -56,7 +56,7 @@ Podczas badań specyfikacja karty graficznej nie ma wpływu na wyniki, gdyż dla
 	\item{Czas przed którym pierwszy bajt danych miał zostać wysłany\footnote{time\_starttransfer}}
 	\item{Czas całkowity\footnote{time\_total}}
 \end{itemize}
-Obydwie platformy pozwalają na szczegółową konfigurację instalacji. Z racji iż testy były wykonywane na jednej i tej samej maszynie należało ustawić sztuczny(wirtualny) klaster. Oznacza to, że na maszynie było imitowane rozproszone środowisko obliczeniowe. Dla Apache Spark tryb lokalny został ustawiony na maksymalną możliwą liczbę dostępnych wątków wirtualnej maszyny Java - oznacza to, że liczba zwróconych dostępnych wątków przez metodę przedstawioną na listingu \ref{lst:jvm-threads-access} definiuje ile operacji Apache Spark może wykonywać w tej samej jednostce czasu. Konfiguracja jest widoczna na listingu \ref{lst:spark-cluster-config}. Konfiguracja pozwala na tworzenie kontekstu dla zapytań o dane statyczne (na przykład baza danych), jak również o charakterze dynamicznym (strumieniowanie). Jak widać na listingu \ref{lst:spark-cluster-config} w linii 4 ustawiany jest również cykl zapisu danych dynamicznych (zapis 360 sekund).
+Obydwie platformy pozwalają na szczegółową konfigurację instalacji. Z racji iż testy były wykonywane na jednej i tej samej maszynie należało ustawić sztuczny(wirtualny) klaster. Oznacza to, że na maszynie było imitowane rozproszone środowisko obliczeniowe. Dla Apache Spark tryb lokalny został ustawiony na maksymalną możliwą liczbę dostępnych wątków wirtualnej maszyny Java - oznacza to, że liczba zwróconych dostępnych wątków przez metodę przedstawioną na listingu \ref{lst:jvm-threads-access} definiuje ile operacji Apache Spark może wykonywać w tej samej jednostce czasu. Konfiguracja jest widoczna na listingu \ref{lst:spark-cluster-config}. Konfiguracja pozwala na tworzenie kontekstu dla zapytań o dane statyczne (na przykład baza danych), jak również o charakterze dynamicznym (strumieniowanie). Jak widać na listingu \ref{lst:spark-cluster-config} w linii 4 ustawiany jest również cykl zapisu danych dynamicznych (zapis co 360 sekund).
 \begin{lstlisting}[language=scala, caption={Metoda zwracająca liczbę dostępnych wątków wirtualnej maszyny Java},captionpos=b, label={lst:jvm-threads-access}]
 Runtime.getRuntime.availableProcessors() 
 \end{lstlisting}
@@ -97,7 +97,7 @@ Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli 
 	\label{tab:word-count-results}
 	\begin{tabular}{|l|l|l|}
 		\hline
-		Czas w sekundach    & Hadoop     & Spark      \\ \hline
+		Czas [s]    & Hadoop     & Spark      \\ \hline
 		time\_namelookup    & 0.000020   & 0.000023   \\ \hline
 		time\_connect       & 0.000097   & 0.000116   \\ \hline
 		time\_appconnect    & 0.000000   & 0.000000   \\ \hline
@@ -114,7 +114,7 @@ Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref
 	\label{tab:filter-results}
 	\begin{tabular}{|l|l|l|}
 		\hline
-		Czas w sekundach    & Hadoop    & Spark     \\ \hline
+		Czas [s]    & Hadoop    & Spark     \\ \hline
 		time\_namelookup    & 0.000022  & 0.000029  \\ \hline
 		time\_connect       & 0.000090  & 0.000113  \\ \hline
 		time\_appconnect    & 0.000000  & 0.000000  \\ \hline
@@ -131,7 +131,7 @@ Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref
 	\label{tab:reject-results}
 	\begin{tabular}{|l|l|l|}
 		\hline
-		Czas w sekundach    & Hadoop     & Spark     \\ \hline
+		Czas [s]    & Hadoop     & Spark     \\ \hline
 		time\_namelookup    & 0.000025   & 0.000049  \\ \hline
 		time\_connect       & 0.000098   & 0.000184  \\ \hline
 		time\_appconnect    & 0.000000   & 0.000000  \\ \hline
