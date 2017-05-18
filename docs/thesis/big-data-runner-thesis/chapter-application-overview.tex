@@ -150,4 +150,77 @@ Z punktu widzenia badanej wydajności wszystkie pomiary poza \textbf{time\_start
 	\caption{Wyniki wydajności operacji: Word Count, Filter i Reject}
 	\label{fig:results-comparison-bar}
 \end{figure}   
-\todo{koszty rekrutacji, cyclomatic complexity?}
+\section{Koszty rozwoju i zasobów ludzkich}
+Badane platformy Apache Spark oraz Apache Hadoop są przedstawicielami dwóch języków programowania dedykowanych na platformę JVM: Scala oraz Java. Apache Spark jest narzędziem napisanym w języku Scala i posiada interfejs programistyczny dla czterech języków programowania: Scala, Java, Python oraz R. Apache Hadoop to narzędzie oparte wyłącznie na języku Java. Rozwijanie systemów informatycznych wiąże się z wieloma aspektami takimi jak: koszty rekrutacji inżynierów posiadających wiedzę z wąskiej dziedziny np. język programowania, ramy projektowej, poszczególnych bibliotek. Innym aspektem długofalowego projektu informatycznego jest pozostawienie możliwości na rozszerzanie rozwiązania oraz integracja z innymi platformami bądź językami programowania. W przypadku Apache Hadoop rozwiązanie jest zamknięte na język Java i integracja z innymi językami programowania wymaga serializacji danych bądź też ich zapisu we wcześniej uzgodnionym formacie na przykład HDFS. W przypadku Apache Spark prace implementacji systemu mogą być prowadzone w kilku językach. Dodatkowo można wykorzystywać zaletę samego języka Scala, gdzie wszystkie biblioteki z języka Java są dostępne i nie wymagają żadnego dodatkowego nakładu pracy przy ich użyciu. W kontekście tej pracy magisterskiej zostały wykonane implementacje tych samych funkcjonalności dla dwóch języków Scala i Java. Operacja zliczenia wystąpień danej frazy w linii dla języka Scala została przedstawiona w listingu \ref{lst:scala-occurence-listing}. Ta sama operacja dla języka Java została przedstawiona w listingu \ref{lst:java-occurrence-listing}.
+\begin{lstlisting}[language=scala, caption={Operacja zliczania wystąpień danej frazy w linii dla języka Scala na platformie Apache Spark},captionpos=b, label={lst:scala-occurence-listing}]
+class WordOccurrence {
+	def run(sparkContext: SparkContext, filePath: String, word: String) = {
+	val lines: RDD[String] = sparkContext.textFile(filePath)
+	val linesContainingWord = lines.filter(line => line.contains(word))
+	linesContainingWord.count()
+	}
+}
+\end{lstlisting}
+\begin{lstlisting}[language=Java, caption={Operacja zliczania wystąpień danej frazy w linii dla języka Java na platformie Apache Hadoop},captionpos=b, label={lst:java-occurrence-listing}]
+public class WordOccurrence {
+
+public long run(String basePathHDFS, String wordToBeFound) throws Exception {
+Path pt = new Path(basePathHDFS + "mergedTweets0.3686418061949279.txt");
+Configuration conf = new Configuration();
+conf.set("fs.defaultFS", basePathHDFS);
+conf.set("wordToBeFound", wordToBeFound);
+Job job = new Job(conf, "WordOccurrence");
+job.setOutputKeyClass(Text.class);
+job.setOutputValueClass(IntWritable.class);
+
+job.setMapperClass(FilterMapper.class);
+job.setReducerClass(SimpleReduce.class);
+
+job.setInputFormatClass(TextInputFormat.class);
+job.setOutputFormatClass(TextOutputFormat.class);
+
+FileInputFormat.addInputPath(job, pt);
+TimeStamp myTs = TimeStamp.getCurrentTime();
+FileOutputFormat.setOutputPath(job, new Path(basePathHDFS + "hadoopWordOccurrenceResult" + myTs));
+job.waitForCompletion(true);
+return job.getCounters().findCounter("org.apache.hadoop.mapred.Task$Counter", "MAP_OUTPUT_RECORDS").getValue();
+}
+
+}
+
+public class FilterMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+private final IntWritable one = new IntWritable(1);
+private Text word = new Text();
+
+public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+String wordToBeFound = context.getConfiguration().get("wordToBeFound");
+String line = value.toString();
+if (line.contains(wordToBeFound)) {
+context.write(word, one);
+}
+}
+}
+public class SimpleReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
+public void reduce(Text key, Iterable<IntWritable> values, Context context)
+throws IOException, InterruptedException {
+int sum = 0;
+for (IntWritable val : values) {
+sum += val.get();
+}
+context.write(key, new IntWritable(sum));
+}
+}
+\end{lstlisting}
+Nie trudno zauważyć, że ta sama funkcjonalność dla języka Scala może być przedstawiona o wiele bardziej zwięźle i czytelnie niż w języku Java. Sama różnica w ilości kodu jest zauważalna - Scala 7 linii, Java 48 linii. W przypadku utrzymywania kodu jest to bardzo ważne by rozwiązania były czytelne i łatwe do opanowania. Szczególnie istotne jest to w dużych projektach, gdzie inżynierowie często zmieniają odpowiedzialność za dany fragment funkcjonalności, bądź też występuje duża rotacja programistów. Wybór języka programowania, może też mieć znaczący wpływ na koszty rozwoju oraz utrzymania danego projektu informatycznego z racji na różnice w zarobkach ze względu na technologię. Na wykresach \ref{fig:@=salaries_contract} oraz \ref{fig:@=salaries_permanent} możemy zobaczyć koszty zatrudniania inżynierów ze względu na technologię oraz rodzaj zatrudnienia w latach 2015, 2016 oraz 2017 na terenie Wielkiej Brytanii. Dane zostały pobrane z serwisu internetowego \url{https://www.itjobswatch.co.uk}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{salaries_contract.png}
+	\caption{Trendy zarobków rocznych na terenie Wielkiej Brytanii w latach 2015, 2016 oraz 2017 dla formy zatrudnienia na kontrakt.}
+	\label{fig:@=salaries_contract}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{salaries_permanent.png}
+	\caption{Trendy zarobków rocznych na terenie Wielkiej Brytanii w latach 2015, 2016 oraz 2017 dla formy zatrudnienia stałego (umowy o pracę).}
+	\label{fig:@=salaries_permanent}
+\end{figure}
