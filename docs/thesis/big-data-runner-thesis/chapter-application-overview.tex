@@ -90,7 +90,7 @@ Apache Hadoop może być uruchamiany w trzech trybach: pojedynczy proces JVM (\t
 \end{lstlisting}
 Poza adresem Apache Hadoop, został zdefiniowany katalog na dysku twardym, gdzie HDFS będzie przechowywał swoje dane. Hadoop podobnie jak Spark został ustawiony na partycjonowanie danych w czterech częściach.
 \section{Wyniki}
-Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. 
+Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli \ref{tab:word-count-results}. Wielkość pliku wsadowego to 4 GB. Można zaobserwować, że operacja na platformie Apache Spark jest około cztery razy szybsza od Apache Hadoop. Wszystkie pomiary poza $time\_starttransfer$ oraz $time\_total$ można uznać za pomijalne dla końcowego użytkownika. Warto też odnotować iż operacja \textit{Word Count} jest najbardziej czasochłonną operacją spośród wszystkich badanych.  
 \begin{table}[]
 	\centering
 	\caption{Wyniki wydajności dla zliczania ilości wystąpień poszczególnych fraz tekstowych (oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku}
@@ -107,7 +107,7 @@ Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli 
 		time\_total         & 402.792625 & 111.232446 \\ \hline
 	\end{tabular}
 \end{table}
-Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref{tab:filter-results}.
+\newline Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref{tab:filter-results}. Wielkość pliku wsadowego to 4GB. Operacja \textit{Filter} jest około dwa i pół raza wolniejsza na platformie Apache Hadoop w stosunku do Apache Spark. Również w tym przypadku wszelkie pomiary poza $time\_starttransfer$ oraz $time\_total$ można uznać za pomijalne dla końcowego użytkownika. Operacja \textit{Filter} jest najkrócej trwającą, ze wszystkich badanych. 
 \begin{table}[]
 	\centering
 	\caption{Wyniki wydajności dla zliczania ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika}
@@ -124,7 +124,7 @@ Dla operacji \textit{Filter} wyniki wydajności są przedstawione w tabeli \ref
 		time\_total         & 42.685924 & 16.489860 \\ \hline
 	\end{tabular}
 \end{table}
-Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref{tab:reject-results}.
+\newline Dla operacji \textit{Reject} wyniki wydajności są przedstawione w tabeli \ref{tab:reject-results}. Wielkość pliku wsadowego to 4GB. Operacja \textit{Reject} jest około pięciu razy szybsza dla platformy Apache Spark w stosunku do Apache Hadoop. Tak jak w dwóch poprzednich badanych przypadkach: \textit{Filter} oraz \textit{Word Count} pomiary poza $time\_starttransfer$ oraz $time\_total$ można uznać za pomijalne dla końcowego użytkownika.
 \begin{table}[]
 	\centering
 	\caption{Wyniki wydajności odrzucenia linii zawierających frazę tekstową zdefiniowaną przez użytkownika oraz zapisania wyniku do pliku}
@@ -146,11 +146,11 @@ Z punktu widzenia badanej wydajności wszystkie pomiary poza \textbf{time\_start
 \newline W związku z wynikami przedstawionymi w tabelach \ref{tab:filter-results}, \ref{tab:reject-results}, \ref{tab:word-count-results} możemy zaobserwować zależność, że platforma Spark jest zdecydowanie szybsza (od dwóch i pół do pięciu razy) jeżeli chodzi o wykonywanie obliczeń i zapis wyników do pliku w systemie HDFS. Porównanie wydajności wszystkich operacji jest przedstawione na \ref{fig:results-comparison-bar}
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[scale=0.4]{results-comparison-bar.png}
-	\caption{Wyniki wydajności operacji: Word Count, Filter i Reject}
+	\includegraphics[scale=0.6]{results-comparison-bar.png}
+	\caption{Wyniki wydajności operacji: Word Count, Filter i Reject na platformach Apache Spark oraz Apache Hadoop.}
 	\label{fig:results-comparison-bar}
 \end{figure}   
-\section{Koszty rozwoju i zasobów ludzkich}
+\section{Koszty rozwoju oprogramowania i zasobów ludzkich}
 Badane platformy Apache Spark oraz Apache Hadoop są przedstawicielami dwóch języków programowania dedykowanych na platformę JVM: Scala oraz Java. Apache Spark jest narzędziem napisanym w języku Scala i posiada interfejs programistyczny dla czterech języków programowania: Scala, Java, Python oraz R. Apache Hadoop to narzędzie oparte wyłącznie na języku Java. Rozwijanie systemów informatycznych wiąże się z wieloma aspektami takimi jak: koszty rekrutacji inżynierów posiadających wiedzę z wąskiej dziedziny np. język programowania, ramy projektowej, poszczególnych bibliotek. Innym aspektem długofalowego projektu informatycznego jest pozostawienie możliwości na rozszerzanie rozwiązania oraz integracja z innymi platformami bądź językami programowania. W przypadku Apache Hadoop rozwiązanie jest zamknięte na język Java i integracja z innymi językami programowania wymaga serializacji danych bądź też ich zapisu we wcześniej uzgodnionym formacie na przykład HDFS. W przypadku Apache Spark prace implementacji systemu mogą być prowadzone w kilku językach. Dodatkowo można wykorzystywać zaletę samego języka Scala, gdzie wszystkie biblioteki z języka Java są dostępne i nie wymagają żadnego dodatkowego nakładu pracy przy ich użyciu. W kontekście tej pracy magisterskiej zostały wykonane implementacje tych samych funkcjonalności dla dwóch języków Scala i Java. Operacja zliczenia wystąpień danej frazy w linii dla języka Scala została przedstawiona w listingu \ref{lst:scala-occurence-listing}. Ta sama operacja dla języka Java została przedstawiona w listingu \ref{lst:java-occurrence-listing}.
 \begin{lstlisting}[language=scala, caption={Operacja zliczania wystąpień danej frazy w linii dla języka Scala na platformie Apache Spark},captionpos=b, label={lst:scala-occurence-listing}]
 class WordOccurrence {
@@ -224,3 +224,4 @@ Nie trudno zauważyć, że ta sama funkcjonalność dla języka Scala może być
 	\caption{Trendy zarobków rocznych na terenie Wielkiej Brytanii w latach 2015, 2016 oraz 2017 dla formy zatrudnienia stałego (umowy o pracę).}
 	\label{fig:@=salaries_permanent}
 \end{figure}
+\newline Na podstawie rysunku \ref{fig:@=salaries_permanent} możemy zauważyć, że w kontekście rekrutacji ze względu na narzędzie bądź język programowania nie występują różnice płac dla stałej formy zatrudnienia. Jest to szczególnie istotne dla projektów o charakterystyce długofalowej oraz dużej wielkości. W przypadku formy zatrudniania stałego pracowników i dużych projektach można wybrać dowolną technologię, gdyż koszty będą relatywnie takie same (wyniki to średnie płac na dane stanowisko). Przedsiębiorstwo może również wybrać tą technologię bądź język programowania, który jest opanowany przez największą grupę docelową na rynku pracy tak by zwiększyć swoje możliwości rekrutacyjne.\newline Zupełnie odwrotnie przedstawia się sytuacja dla okresowej formy zatrudnienia tak zwany kontrakt. Dokładne dane dotyczące formy zatrudnienia na kontrakt są widoczne na rysunku \ref{fig:@=salaries_contract}. 
