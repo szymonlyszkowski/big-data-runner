@@ -15,7 +15,7 @@ Testy wydajności zostały wykonane na danych zebranych poprzez Twitter Develope
 	\label{fig:@=twitter-api-connection}
 \end{figure}
 Proces strumieniowania danych z Twitter Developer API został przedstawiony na rysunku \ref{fig:@=twitter-api-connection}.
-\section{Struktura danych}\label{sec:tweet-structure}
+\section{Struktura źródeł danych}\label{sec:tweet-structure}
 Dane pobrane z Twitter Developer API są zapisywane w systemie plików HDFS, który jest skonfigurowany z główną aplikacją. Dane są przyjmowane jako \textit{DStream}\footnote{Discretized Stream}, który jest główną warstwą abstrakcji dla strumieniowania danych. Wewnętrznie jest to ciąg stale napływających danych w formule RDD, szczegóły na temat RDD można znaleźć w sekcji\ref{rdd-section}. Następnie na napływających danych jest wywołana funkcja \textit{map}, która zapisuje równolegle rozproszony zbiór danych w systemie HDFS. Zapisanie jest dokonane w formacie JSON\footnote{JavaScript Object Notation}. JSON został wybrany ze względu na prostą strukturę i przystępną dla ludzkiego oka prezentację. Otwarcie strumieniowania jest przestawione w listingu \ref{lst:twitter-streaming-scala}  
 \begin{lstlisting}[language=scala, caption={Otwarcie strumieniowania Twitter Developer API oraz zapis do HDFS},captionpos=b, label={lst:twitter-streaming-scala}]
 val twitterInstance = new Twitter4JConfiguration(config).getTwitter4JAccess()
