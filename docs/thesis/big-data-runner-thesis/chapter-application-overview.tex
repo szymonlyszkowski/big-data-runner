@@ -29,11 +29,11 @@ SparkStreaming.streamingContext.start()
 W linii nr 1 następuje konfiguracja dostępu do Twitter Developer API przy użyciu biblioteki Twitter4J\footnote{\url{http://twitter4j.org}}. Linia nr 2 to deklaracja strumienia, ustawienia autoryzacji dla Twitter Developer API oraz konfiguracja formatu zapisu danych. Linie nr 3,4,5 to konfiguracja samego zapisu w systemie HDFS, ustalana jest ilość partycji, na których ma zostać zapisane RDD oraz jak ma nazywać się wynikowy plik w HDFS. Linia nr 8 rozpoczyna faktyczne strumieniowanie danych oraz ich zapis.
 \newline Struktura danych zwracana z Twitter Developer API w formacie JSON zawiera bardzo dużo informacji. Jedne z najbardziej kluczowych są przedstawione w liście \ref{items:tweet-fields}
 \begin{itemize}\label{items:tweet-fields}
-	\item Data utworzenia\footnote{createdAt}
-	\item Udostępnienia tweet'a \footnote{retweetedStatus}
-	\item Zawartość tweet'a\footnote{text}
-	\item Autor\footnote{user}
-	\item Flaga prawda/fałsz dotycząca treści wrażliwych\footnote{isPossiblySensitive}
+	\item data utworzenia\footnote{createdAt},
+	\item udostępnienia tweet'a \footnote{retweetedStatus},
+	\item zawartość tweet'a\footnote{text},
+	\item autor\footnote{user},
+	\item flaga prawda/fałsz dotycząca treści wrażliwych\footnote{isPossiblySensitive}.
 \end{itemize}
 Dokładna struktura danych jest przedstawiona w listingu: \ref{lst:tweet-json}
 \lstinputlisting[language=json,firstnumber=1, label={lst:tweet-json}, captionpos=b, caption={Przykładowa struktura danych pobrana z Twitter Developer API, użyta podczas badań.}]{tweet.json}  
@@ -150,7 +150,7 @@ Z punktu widzenia badanej wydajności wszystkie pomiary poza \textbf{time\_start
 	\caption{Wyniki wydajności operacji: Word Count, Filter i Reject na platformach Apache Spark oraz Apache Hadoop.}
 	\label{fig:results-comparison-bar}
 \end{figure}   
-\section{Koszty rozwoju oprogramowania i zasobów ludzkich}
+\section{Koszty rozwoju oprogramowania i zasobów ludzkich}\label{development_human_resources}
 Badane platformy Apache Spark oraz Apache Hadoop są przedstawicielami dwóch języków programowania dedykowanych na platformę JVM: Scala oraz Java. Apache Spark jest narzędziem napisanym w języku Scala i posiada interfejs programistyczny dla czterech języków programowania: Scala, Java, Python oraz R. Apache Hadoop to narzędzie oparte wyłącznie na języku Java. Rozwijanie systemów informatycznych wiąże się z wieloma aspektami takimi jak: koszty rekrutacji inżynierów posiadających wiedzę z wąskiej dziedziny np. język programowania, ramy projektowej, poszczególnych bibliotek. Innym aspektem długofalowego projektu informatycznego jest pozostawienie możliwości na rozszerzanie rozwiązania oraz integracja z innymi platformami bądź językami programowania. W przypadku Apache Hadoop rozwiązanie jest zamknięte na język Java i integracja z innymi językami programowania wymaga serializacji danych bądź też ich zapisu we wcześniej uzgodnionym formacie na przykład HDFS. W przypadku Apache Spark prace implementacji systemu mogą być prowadzone w kilku językach. Dodatkowo można wykorzystywać zaletę samego języka Scala, gdzie wszystkie biblioteki z języka Java są dostępne i nie wymagają żadnego dodatkowego nakładu pracy przy ich użyciu. W kontekście tej pracy magisterskiej zostały wykonane implementacje tych samych funkcjonalności dla dwóch języków Scala i Java. Operacja zliczenia wystąpień danej frazy w linii dla języka Scala została przedstawiona w listingu \ref{lst:scala-occurence-listing}. Ta sama operacja dla języka Java została przedstawiona w listingu \ref{lst:java-occurrence-listing}.
 \begin{lstlisting}[language=scala, caption={Operacja zliczania wystąpień danej frazy w linii dla języka Scala na platformie Apache Spark},captionpos=b, label={lst:scala-occurence-listing}]
 class WordOccurrence {

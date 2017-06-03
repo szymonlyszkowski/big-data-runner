@@ -1,5 +1,15 @@
-\chapter{Opis metodologii badań} \label{chap.technology-stack}
-
+\chapter{Metodologia badań} \label{chap.technology-stack}
+\section{Opis metodologii badań}
+Do przeprowadzenia badań wymagane było spełnienie następujących warunków:
+\begin{itemize}
+	\item pobranie danych strumieniowych z serwisu Twitter,
+	\item zapis danych w systemie HDFS,
+	\item połączenie zapisanych wcześniej danych w jedno źródło danych masowych o wielkości 4GB,
+	\item wykonanie jednej z operacji: \textit{WordCount, Filter, Reject}(\ref{e2e_operations}) na platformie Apache Hadoop oraz Apache Spark,
+	\item pomiar wyników wydajności dla każdej operacji w odizolowanym, jednorodnym środowisku (szczegółowy opis jednostek pomiarów znajduje się w sekcji\ref{items:time-descriptions}),
+	\item interpretacji rezultatów.
+\end{itemize}
+Dzięki takiej strategii postępowania można było dokonać skutecznego porównania ze względu na wydajność i stwierdzić, która platforma jest szybsza w przypadku zdefiniowanej specyfikacji sprzętowej oraz identycznego źródła danych. Kolejnym czynnikiem uwzględnionym podczas badań był sam kod źródłowy, który może stanowić o decyzji, które narzędzie wybrać. W szczególności rozważana została empiryczna złożoność kodu źródłowego, zarobki inżynierów ze względu na znajomość języka programowania oraz platform do przetwarzania danych masowych, środowisko rozwijania oprogramowania - duże projekty korporacyjne kontra małe aplikacje tworzone na zamówienie bez zapewnienia długofalowego wsparcia. Szczegóły badań drugiego czynniku są przedstawione w sekcji \ref{development_human_resources}.  
 \section{Środowisko badań}
 Do wykonania badań powstała aplikacja internetowa, która udostępnia końcowemu użytkownikowi protokół HTTP. Dzięki temu użytkownik może wykonywać operacje wykorzystujące paradygmat map-reduce bez znajomości platform udostępniających przetwarzanie danych masowych jak również serwisów internetowych. Aplikacja nosi nazwę \textit{big-data-runner}. Aplikacja może być udostępniona na zdalnym serwerze jak również może być uruchomiona lokalnie. Aby uruchomić aplikację jedyne co użytkownik musi posiadać to:
 \begin{itemize}
@@ -27,7 +37,7 @@ Architektura aplikacji big-data-runner jest przedstawiona na rysunku \ref{fig:@=
 \newline Podczas użytkowania użytkownik wysyła żądanie HTTP do aplikacji. Cały mechanizm obsługi żądania oraz odpowiedzi jest zaimplementowany w ramie projektowej Play! Za żądania odpowiedzialne są kontrolery, które wykonują logikę biznesową aplikacji. W zależności od adresu żądania wywołanego przez użytkownika uruchamiany jest odpowiedni kontroler, który wywołuje daną operację na platformie obliczeniowej. W zależności od tego, czy operacje są wywoływane w kontekście platformy Hadoop czy Spark, używane są odpowiednio języki programowania: Java, Scala. Z racji iż aplikacja integruje dwie platformy obok siebie możemy uznać, że kontrolery są częścią aplikacji, które wysyłają \textit{driver program}\footnote{Program sterujący - \url{http://spark.apache.org/docs/latest/cluster-overview.html}} do platformy Hadoop lub Spark. W dokumentacji Apache Hadoop możemy spotkać się z określeniem \textit{Job Configuration}\footnote{Konfiguracja pracy - \url{https://hadoop.apache.org/docs/r2.7.3/api/org/apache/hadoop/mapreduce/Job.html}}. Po wysłaniu odpowiednich instrukcji następuje wykonywanie obliczeń przez daną platformę. Same platformy są dołączone do aplikacji jako biblioteki zewnętrzne. Są integrowane przez narzędzie budujące aplikację SBT. Jednym elementem systemu przetwarzania danych masowych, który nie jest zintegrowany z aplikacją jest HDFS - warstwa odpowiedzialna za przechowywanie danych. HDFS może być umiejscowiony na zdalnym serwerze bądź obok samej aplikacji. Może być pobrany pod adresem: \url{http://hadoop.apache.org/releases.html}. W przeprowadzonych badaniach została użyta wersja 2.8.0. Adres HDFS jest zdefiniowany we właściwościach aplikacji, które znajdują się w pliku \path{<application-root>/conf/application.conf}. Dzięki temu w łatwy sposób administrator aplikacji może zmieniać adres źródła danych.
 \section{Interfejs końcowy użytkownika}\label{sec:user_interfaces}
 Żądania HTTP obsługują trzy rodzaje operacji, które można wykonać na platformach równoległych:
-\begin{itemize}
+\begin{itemize}\label{e2e_operations}
 	\item {zliczanie ilości wystąpień poszczególnych fraz tekstowych (oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku}\footnote{\textit{Word Count}},
 	\item {zliczanie ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika}\footnote{\textit{Filter}},
 	\item {odrzucenie linii zawierających frazę tekstową zdefiniowaną przez użytkownika oraz zapisanie wyniku do pliku}\footnote{\textit{Reject}}.
