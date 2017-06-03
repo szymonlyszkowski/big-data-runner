@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{todonotes}
 \usepackage{url}
-\usepackage{polski}
+\usepackage[english,polish]{babel}
 \usepackage{cite}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -71,6 +71,16 @@
 	morekeywords={xmlns,version,type}% list your attributes here
 }
 \begin{document}
+\begin{otherlanguage}{english} 
+\begin{abstract}
+The topic of this thesis is touching relatively new information technology domain which is Big Data. This master thesis is focusing mainly on two most popular open source platforms used in Big Data processing: Apache Spark and Apache Hadoop. The most crucial part of thesis is comprehensive comparison of both platforms in such manner that end user can estimate which tool is faster, cheaper in further development and maintenance. Additionally the thesis is attempting to answer question whether it is cost effective to migrate from Apache Hadoop to Apache Spark and vice-versa. During research web application was developed which was used in order to obtain throughput results for comparative analysis and further development easyness. Big Data source has been \textit{Twitter Developer API} which allows to use service public data updated in real time. Application was based on two programming languages: Scala and Java, uses \textit{Play!} framework and lifecycle tool \textit{Scala Build Tool}. Source code manangement was realised via \textit{Git}.         
+\end{abstract}
+\end{otherlanguage}
+\begin{otherlanguage}{polish} 
+\begin{abstract}
+	Tematyka niniejszej pracy magisterskiej dotyczy niedawno powstałej dziedziny informatyki jaką jest przetwarzanie danych masowych. Praca skupia się głównie na dwóch najpopularniejszych narzędziach używanych w procesie przetwarzania danych masowych dostępnych na licencji otwartego kodu źródłowego: Apache Spark i Apache Hadoop. Najważniejszym elementem pracy jest kompleksowe porównanie obu platform tak by dać użytkownikowi możliwość oceny, które narzędzie jest szybsze, tańsze w rozwijaniu i utrzymaniu oraz czy warto migrować z jednej platformy na drugą i odwrotnie. Podczas przeprowadzonych badań powstała aplikacja internetowa, która posłużyła jako narzędzie dostarczające wyniki wydajności dla analizy porównawczej, jak również łatwości pod względem dalszego rozwoju. Źródłem danych masowych jest \textit{Twitter Developer API}, które udostępnia publiczne dane serwisu aktualizowane w czasie rzeczywistym. Aplikacja została oparta na dwóch językach programowania Scala oraz Java, jednocześnie wykorzystuje ramę projektową \textit{Play!} oraz narzędzie do budowania i zarządzania cyklem dostarczania oprogramowania\textit{Scala Build Tool}. Wersjonowanie kodu źródłowego zostało zrealizowane przy pomocy systemu kontroli wersji \textit{Git}. 
+\end{abstract}
+\end{otherlanguage}
 \tableofcontents
 \include{chapter-introduction}
 \include{chapter-big-data-processing}
