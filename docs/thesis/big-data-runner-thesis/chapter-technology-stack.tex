@@ -44,14 +44,17 @@ Architektura aplikacji big-data-runner jest przedstawiona na rysunku \ref{fig:@=
 \end{itemize}
 Użytkownik może wybrać następujące punkty obsługi żądania:
 \begin{enumerate}
-	\item{\url{<hostname>/api/spark/wordcount}}
-	\item{\url{<hostname>/api/spark/wordOccurrence/<string> }}
-	\item{\url{<hostname>/api/spark/wordReject/<string> }}
+	\item{\url{<hostname>/api/spark/memoryOnly/wordcount}}
+	\item{\url{<hostname>/api/spark/memoryOnly/wordOccurrence/<string> }}
+	\item{\url{<hostname>/api/spark/memoryOnly/wordReject/<string> }}
+	\item{\url{<hostname>/api/spark/diskOnly/wordcount}}
+	\item{\url{<hostname>/api/spark/diskOnly/wordOccurrence/<string> }}
+	\item{\url{<hostname>/api/spark/diskOnly/wordReject/<string> }}
 	\item{\url{<hostname>/api/hadoop/wordcount}}
 	\item{\url{<hostname>/api/hadoop/wordOccurrence/<string>}}
 	\item{\url{<hostname>/api/hadoop/wordReject/<string> }}
 \end{enumerate}
-Punkty od 1 do 3 obsługują platformę Spark. Punkt 1 jest odpowiedzialny za zliczanie wystąpień poszczególnych fraz, punkt 2 za zliczanie wystąpień danej frazy w linii. Punkt 3 odrzuca te linie, które zawierały frazę zdefiniowaną przez użytkownika. Odpowiednio punkty 4, 5, 6 są odpowiedzialne za te same operacje z tą różnicą, że są uruchamiane na platformie Hadoop.  
+Punkty od 1 do 6 obsługują platformę Spark. Punkt 1 jest odpowiedzialny za zliczanie wystąpień poszczególnych fraz, punkt 2 za zliczanie wystąpień danej frazy w linii. Punkt 3 odrzuca te linie, które zawierały frazę zdefiniowaną przez użytkownika. Interfejsy przedstawione w punktach od 1 do 3 wykorzystują pamięć RAM, punkty od 4 do 6 odrzucają wykorzystanie szybkiej pamięci RAM i korzystają z dysku twardego. Szczegóły tych ustawień są przedstawione w tabeli \ref{RDD-strategy}. Odpowiednio punkty 7, 8, 9 są odpowiedzialne za operacje \textit{Word Count, Filter, Reject} z tą różnicą, że są uruchamiane na platformie Hadoop.  
 
 \section{Dostęp do serwisów zewnętrznych}\label{sec:twitter-api}
 Aplikacja posiada również dostęp do jednego serwisu zewnętrznego jakim jest \textit{Twitter Developer API}\footnote{\url{https://dev.twitter.com/}}. Funkcjonalność ta została zaimplementowana, gdyż Twitter jest doskonałym źródłem danych masowych. Na podstawie danych zebranych poprzez Twitter Developer API zostały wykonane badania dotyczące szybkości obu platform. Sam proces zbierania danych jest zaimplementowany poprzez wykorzystanie \textit{Spark Streaming}\footnote{\url{http://spark.apache.org/streaming/}}. Dzięki temu użytkownik jest w stanie zbierać dane "na żywo". Oznacza to, że otwierany jest potok z danymi, które są zapisywane cyklicznie do HDFS. Cykl zapisu to okres czasu co jaki ma wystąpić zapis. W przypadku aplikacji big-data-runner jest to \textbf{360 sekund}. Dzięki takiemu podejściu możliwe jest zbieranie wielkich ilości danych bez ryzyka, iż niestabilne połączenie internetowe uszkodzi dane, bądź całkowicie uniemożliwi zapis. Aby móc skorzystać z Twitter Developer API wymagane są odpowiednie uprawnienia. Uprawnienia są przyznawane dla pary: użytkownik - aplikacja. Dane uprawnień znajdują się w pliku \path{<application-root>/conf/twitter.conf}. Konfiguracja uprawnień jest zapewniona przez bibliotekę \textit{Twitter4J}.\footnote{\url{http://twitter4j.org}}
