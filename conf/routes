@@ -7,9 +7,13 @@ GET     /api/spark/live/list/stop               controllers.spark.live.LiveTweet
 
 #Endpoints using HDFS & Spark
 GET     /api/spark/batch/merge/tweets           controllers.spark.batch.TweetMergeController.mergeTweets
-GET     /api/spark/wordcount                    controllers.spark.WordCountController.wordCount
-GET     /api/spark/wordOccurrence/:word         controllers.spark.WordOccurrenceController.wordOccurrence(word: String)
-GET     /api/spark/wordReject/:word             controllers.spark.WordRejectController.wordReject(word: String)
+GET     /api/spark/memoryOnly/wordcount                    controllers.spark.memory.WordCountController.wordCount
+GET     /api/spark/memoryOnly/wordOccurrence/:word         controllers.spark.memory.WordOccurrenceController.wordOccurrence(word: String)
+GET     /api/spark/memoryOnly/wordReject/:word             controllers.spark.memory.WordRejectController.wordReject(word: String)
+
+GET     /api/spark/diskOnly/wordcount                    controllers.spark.disk.WordCountController.wordCount
+GET     /api/spark/diskOnly/wordOccurrence/:word         controllers.spark.disk.WordOccurrenceController.wordOccurrence(word: String)
+GET     /api/spark/diskOnly/wordReject/:word             controllers.spark.disk.WordRejectController.wordReject(word: String)
 
 #Endpoints using HDFS & Hadoop
 GET     /api/hadoop/wordcount                   controllers.hadoop.WordCountController.wordCount

@@ -1,4 +1,4 @@
-package controllers.spark
+package controllers.spark.memory
 
 import javax.inject.Inject
 
