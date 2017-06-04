@@ -51,6 +51,58 @@ Dla operacji \textit{Word Count} wyniki wydajności są przedstawione w tabeli 
 		time\_total         & 238.408673 & 45.186296 \\ \hline
 	\end{tabular}
 \end{table}
+
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności odrzucenia linii zawierających frazę tekstową zdefiniowaną przez użytkownika oraz zapisania wyniku do pliku na platformie Apache Spark ze względu na zastosowanie strategi przechowywania RDD.}
+	\label{tab:reject-spark-modes-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas{[}s{]}         & Dysk twardy & Pamięć RAM \\ \hline
+		time\_namelookup    & 0.000029    & 0.000049   \\ \hline
+		time\_connect       & 0.000106    & 0.000184   \\ \hline
+		time\_appconnect    & 0.000000    & 0.000000   \\ \hline
+		time\_pretransfer   & 0.000140    & 0.000237   \\ \hline
+		time\_redirect      & 0.000000    & 0.000000   \\ \hline
+		time\_starttransfer & 162.751406  & 45.186254  \\ \hline
+		time\_total         & 162.751459  & 45.186296  \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności dla zliczania ilości linii zawierających frazę tekstową zdefiniowaną przez użytkownika na platformie Apache Spark ze względu na zastosowanie strategi przechowywania RDD.}
+	\label{tab:word-occurence-spark-modes-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas{[}s{]}         & Dysk twardy & Pamięć RAM \\ \hline
+		time\_namelookup    & 0.000021    & 0.000029   \\ \hline
+		time\_connect       & 0.000096    & 0.000113   \\ \hline
+		time\_appconnect    & 0.000000    & 0.000000   \\ \hline
+		time\_pretransfer   & 0.000115    & 0.000140   \\ \hline
+		time\_redirect      & 0.000000    & 0.000000   \\ \hline
+		time\_starttransfer & 51.502827   & 16.489812 \\ \hline
+		time\_total         & 51.502860   & 16.489860 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[]
+	\centering
+	\caption{Wyniki wydajności dla zliczania ilości wystąpień poszczególnych fraz tekstowych (oddzielonych spacją) znalezionych w źródle danych oraz zapisu wyniku do pliku na platformie Apache Spark ze względu na zastosowanie strategi przechowywania RDD.}
+	\label{tab:word-count-spark-modes-results}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Czas{[}s{]}         & Dysk twardy & Pamięć RAM \\ \hline
+		time\_namelookup    & 0.000023    & 0.000023   \\ \hline
+		time\_connect       & 0.000099    & 0.000116   \\ \hline
+		time\_appconnect    & 0.000000    & 0.000000   \\ \hline
+		time\_pretransfer   & 0.000118    & 0.000134   \\ \hline
+		time\_redirect      & 0.000000    & 0.000000   \\ \hline
+		time\_starttransfer & 144.407036  & 111.232410 \\ \hline
+		time\_total         & 144.407089  & 111.232446 \\ \hline
+	\end{tabular}
+\end{table}
+
 \section{Interpretacja wyników}
 Z punktu widzenia badanej wydajności wszystkie pomiary poza \textbf{time\_starttransfer} oraz \textbf{time\_total} nie są kluczowe gdyż pomijają czas pracy badanych platform. Czas całkowity jest interesujący z punktu widzenia użytkownika systemu, którego interesuje faktyczny czas uzyskania wyników. Podczas interpretacji wyników mylący może być opis przedstawiony w \ref{items:time-descriptions} \textit{Czas przed którym pierwszy bajt danych miał zostać wysłany}. Opis ten nie dotyczy danych, które są przetwarzane na badanych platformach lecz danych wysłanych przez odpowiedź na żądanie HTTP. Oznacza to, że dane odpowiedzi zostały wysłane po czasie gdy wszystkie obliczenia na platformie zostały już wykonane. W związku z tym \textbf{time\_starttransfer} może zostać uznany za czas pracy przetwarzania na danej platformie.
 \newline W związku z wynikami przedstawionymi w tabelach \ref{tab:filter-results}, \ref{tab:reject-results}, \ref{tab:word-count-results} możemy zaobserwować zależność, że platforma Spark jest zdecydowanie szybsza (od dwóch i pół do pięciu razy) jeżeli chodzi o wykonywanie obliczeń i zapis wyników do pliku w systemie HDFS. Porównanie wydajności wszystkich operacji jest przedstawione na \ref{fig:results-comparison-bar}
