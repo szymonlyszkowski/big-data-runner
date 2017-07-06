@@ -39,3 +39,32 @@ The team (SM + developerzy ), The Scrum Team (PO + SM + developerzy), Backlog, i
 Zazwyczaj są to liczby ciągu fibonnaciego 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100. Wyrażają one stopień skomplikowania zadania, jak również czasochłonność.
 Velocity - jak dużo story pointów może dostarczyć zespół w iteracji (można policzyć po 11 sprintach)
 Capacity - jaka ilość czasu jest dostępna w sprincie, pomaga w zaplanowaniu ile stories może być wzięte do sprintu.
+
+#### Inteligentne klasyfikatory
+TODO
+
+#### SVM Maszyny wektorów wspierających
+
+#### Walidacja, walidacja krzyżowa
+Walidacja - dla danych treningowych obliczamy błąd funkcji hipotezy (błąd odpowiedzi). Na podstawie błędu możemy korygować parametry funkcji hipotezy.
+
+Walidacja krzyżowa - zbiór danych dzielimy na 3 części: zbior treningowy, zbiór walidacyjny, zbiór testowy. Zbiór testowy służy do oszacowania poprawności wybranego modelu. Zbiory testowe i walidacyjne do oszacowania błędu badanego modelu.
+
+
+#### Drzewa decyzyjne i ich nauka
+Zachłanna selekcja cech w przód - można liczyć miarę uporządkowania za pomocą indeksu Giniego lub entropi. Na pierwszą cechę do podziału brać tą, która prezentuje miarę uporządkowania największą. Następnie zbior danych pomniejszamy o wybraną cechę i konstrujemy drzewo rekruencyjnie dla każdej gałęzi osobno.
+
+#### Naiwny Bayes
+Jest naiwny gdyż zakłada niezależnośc cech.
+
+#### Złożoność obliczeniowa
+Ilość zasobów komputerowych potrzebnych do wykonania programu
+* Pesymistyczna - zużycie zasobów dla najmniej korzystnego zestawu danych
+* Średnia - zużycie zasobów dla danych losowych
+* Optymistyczna - zużycie zasobów dla najbardziej korzystnych danych
+
+#### Strategie algorytmów
+* Dziel i rządź - dzielenie problemu na mniejsze podproblemy rekurencyjnie do czasu aż dany podproblem staje się wystarczająco prosty do rozwiązania. Np. Merge stort
+* Programowanie dynamiczne - rozszerzenie schematu dziel i rządź. Przydane gdy dane nie są od siebie niezależne. Oznacza to, że raz rozwiązany podproblem nie jest rozwiązywany poraz drugi, lecz brany z tabeli gdzie został wcześniej zapamiętany (cache).
+
+  
