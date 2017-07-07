@@ -67,4 +67,19 @@ Ilość zasobów komputerowych potrzebnych do wykonania programu
 * Dziel i rządź - dzielenie problemu na mniejsze podproblemy rekurencyjnie do czasu aż dany podproblem staje się wystarczająco prosty do rozwiązania. Np. Merge stort
 * Programowanie dynamiczne - rozszerzenie schematu dziel i rządź. Przydane gdy dane nie są od siebie niezależne. Oznacza to, że raz rozwiązany podproblem nie jest rozwiązywany poraz drugi, lecz brany z tabeli gdzie został wcześniej zapamiętany (cache).
 
-  
+#### Programownie masowo-równoległe
+Programowanie GPU polega na podzieleniu wielu operacji na shadery (jednostki obliczeniowe - shader jest odpowiedzialny za wyświetlanie piksela na ekranie, może być wykorzystany do innych zadań), które są wykonywane równolegle przez każdy wątek karty graficznej. Shader traktujemy jako program.
+Wady:
+* Ograniczenie ze względu na liczby zmienno przecinkowe
+* Konieczna znajomość API: OpenGL, OpenCL, CUDA
+* GPU posiada osobną pamięć więc czasami dane muszą być przeniesione do RAM
+
+#### Warstwowa budowa aplikacji internetowych - MVC
+* Model - odpowiada za modelowanie problemu domenowego, często jest to reprezentacja danych
+* View - Warstwa prezentacji, interfejs użytkownika
+* Controller - odpowiedzialny za kontrolowanie przepływu danych z modelu do widoku i odwrotnie
+
+#### SOAP i Restful
+* SOAP (Simple Object Access Protocol) - oparty na formacie XML. Komunikat składa się z: Envelope(początek, koniec wiadomości, obowiazkowy), Header(parametry opcjonalne, opcjonalny), Body(zawartosc wiadomosci, obowiazkowy). SOAP z definicji jest bardzo formalny – tzn. każdy serwis powinien udostępniać plik WSDL, który opisuje jak się nazywa każda operacja, jakie dane przyjmuje, jakiego typu są to dane itp
+
+* RESTful - architektura komunikacji, oparta na protokole HTTP. REST jest bezstanowy i bazuje na metodach HTTP: GET, PUT, POST, TRACE, DELETE etc.
