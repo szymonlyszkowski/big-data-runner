@@ -1,8 +1,9 @@
-package controllers.spark
+package controllers.spark.memory
 
 import javax.inject.Inject
+
 import bigdata.engines.spark.SparkStreaming
-import bigdata.engines.spark.actions.{WordOccurrence}
+import bigdata.engines.spark.actions.WordOccurrence
 import play.api.mvc.{Action, Controller}
 
 
