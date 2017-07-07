@@ -83,3 +83,7 @@ Wady:
 * SOAP (Simple Object Access Protocol) - oparty na formacie XML. Komunikat składa się z: Envelope(początek, koniec wiadomości, obowiazkowy), Header(parametry opcjonalne, opcjonalny), Body(zawartosc wiadomosci, obowiazkowy). SOAP z definicji jest bardzo formalny – tzn. każdy serwis powinien udostępniać plik WSDL, który opisuje jak się nazywa każda operacja, jakie dane przyjmuje, jakiego typu są to dane itp
 
 * RESTful - architektura komunikacji, oparta na protokole HTTP. REST jest bezstanowy i bazuje na metodach HTTP: GET, PUT, POST, TRACE, DELETE etc.
+
+#### Liniowa i nieliniowa filtracja obrazu
+* Filtry  liniowe - bazują na  operacjach  liniowych  (łatwiejsze  w  realizacji). Mogą służyć do wyostrzania obrazu, bądź detekcji krawędzi.
+* Filtry nieliniowe - bazują na nieliniowych operacjach np. operacje logiczne.  Użyteczne do poprawy jakości obrazu bądź redukcji szumów.
